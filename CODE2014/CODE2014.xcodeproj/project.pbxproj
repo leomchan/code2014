@@ -27,7 +27,7 @@
 		F8F11DD118C1ADA400AD6890 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F11DD018C1ADA400AD6890 /* main.m */; };
 		F8F11DD518C1ADA400AD6890 /* CODEAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F11DD418C1ADA400AD6890 /* CODEAppDelegate.m */; };
 		F8F11DD818C1ADA400AD6890 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8F11DD618C1ADA400AD6890 /* Main.storyboard */; };
-		F8F11DDB18C1ADA400AD6890 /* CODEViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F11DDA18C1ADA400AD6890 /* CODEViewController.m */; };
+		F8F11DDB18C1ADA400AD6890 /* CODEListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F11DDA18C1ADA400AD6890 /* CODEListViewController.m */; };
 		F8F11DDD18C1ADA400AD6890 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8F11DDC18C1ADA400AD6890 /* Images.xcassets */; };
 		F8F11DE418C1ADA500AD6890 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F11DE318C1ADA500AD6890 /* XCTest.framework */; };
 		F8F11DE518C1ADA500AD6890 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F11DC418C1ADA400AD6890 /* Foundation.framework */; };
@@ -77,8 +77,8 @@
 		F8F11DD318C1ADA400AD6890 /* CODEAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CODEAppDelegate.h; sourceTree = "<group>"; };
 		F8F11DD418C1ADA400AD6890 /* CODEAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CODEAppDelegate.m; sourceTree = "<group>"; };
 		F8F11DD718C1ADA400AD6890 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		F8F11DD918C1ADA400AD6890 /* CODEViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CODEViewController.h; sourceTree = "<group>"; };
-		F8F11DDA18C1ADA400AD6890 /* CODEViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CODEViewController.m; sourceTree = "<group>"; };
+		F8F11DD918C1ADA400AD6890 /* CODEListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CODEListViewController.h; sourceTree = "<group>"; };
+		F8F11DDA18C1ADA400AD6890 /* CODEListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CODEListViewController.m; sourceTree = "<group>"; };
 		F8F11DDC18C1ADA400AD6890 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F8F11DE218C1ADA500AD6890 /* CODE2014Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CODE2014Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F11DE318C1ADA500AD6890 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -190,8 +190,8 @@
 				F8F11DD318C1ADA400AD6890 /* CODEAppDelegate.h */,
 				F8F11DD418C1ADA400AD6890 /* CODEAppDelegate.m */,
 				F8F11DD618C1ADA400AD6890 /* Main.storyboard */,
-				F8F11DD918C1ADA400AD6890 /* CODEViewController.h */,
-				F8F11DDA18C1ADA400AD6890 /* CODEViewController.m */,
+				F8F11DD918C1ADA400AD6890 /* CODEListViewController.h */,
+				F8F11DDA18C1ADA400AD6890 /* CODEListViewController.m */,
 				F8EF275218C2795100598794 /* CODEPieChartInfoViewController.h */,
 				F8EF275318C2795100598794 /* CODEPieChartInfoViewController.m */,
 				F8EF274D18C2534500598794 /* CODEMapViewController.h */,
@@ -338,7 +338,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F8EF273718C23D0100598794 /* CODEBaseViewController.m in Sources */,
-				F8F11DDB18C1ADA400AD6890 /* CODEViewController.m in Sources */,
+				F8F11DDB18C1ADA400AD6890 /* CODEListViewController.m in Sources */,
 				F8EF275418C2795100598794 /* CODEPieChartInfoViewController.m in Sources */,
 				F8EF274F18C2534500598794 /* CODEMapViewController.m in Sources */,
 				F8EF275718C2810500598794 /* CODEPieChart.m in Sources */,

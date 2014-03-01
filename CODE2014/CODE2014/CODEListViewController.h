@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CODEBaseViewController.h"
 
-@interface CODEViewController : CODEBaseViewController<UITableViewDataSource, UITableViewDelegate>
+@interface CODEListViewController : CODEBaseViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *mainTableView;
 
