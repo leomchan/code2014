@@ -9,6 +9,7 @@
 #import "CODEMapViewController.h"
 #import "CODEDataManager.h"
 #import "CODECalloutView.h"
+#import "CODEListViewController.h"
 
 NSString * const CODEMapViewControllerCountryAnnotationIdentifier = @"country";
 NSString * const CODEMapViewControllerPushToInfoSegueIdentifier = @"CODEPushToInfo";
@@ -67,11 +68,36 @@ NSString * const CODEMapViewControllerPushToInfoSegueIdentifier = @"CODEPushToIn
 	// Do any additional setup after loading the view.
 }
 
+- (void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (self.selectedObject != nil){
+        
+        PFGeoPoint *geoPoint = self.selectedObject[@"location"];
+        CLLocationCoordinate2D track;
+        track.latitude = geoPoint.latitude;
+        track.longitude = geoPoint.longitude;
+        
+        MKCoordinateRegion region;
+        MKCoordinateSpan span;
+        span.latitudeDelta = 5;
+        span.longitudeDelta = 5;
+        region.span = span;
+        region.center = track;
+        [self.mapView setRegion:region];
+        
+    }
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+/******************************************************************************/
+/******************************************************************************/
+/******************************************************************************/
+
+#pragma mark - Map View
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
 {
@@ -113,6 +139,18 @@ NSString * const CODEMapViewControllerPushToInfoSegueIdentifier = @"CODEPushToIn
 {
     for (UIView *subview in view.subviews) {
         [subview removeFromSuperview];
+    }
+}
+
+/******************************************************************************/
+/******************************************************************************/
+/******************************************************************************/
+
+#pragma mark - Storyboard
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"CODEPushToList"]){
+        CODEListViewController *controller = segue.destinationViewController;
+        controller.codeMapViewController = self;
     }
 }
 

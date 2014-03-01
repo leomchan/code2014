@@ -33,7 +33,6 @@ static CODEDataManager *manager = nil;
 }
 
 - (void) getApplicableCountriesWithBlock:(CODEDataRetrievalBlock) block{
-    
     PFQuery *query = [PFQuery queryWithClassName:@"CountryInfo"];
     [query setLimit:1000];
     [query orderByAscending:@"englishName"];

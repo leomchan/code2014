@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "CODEBaseViewController.h"
+#import "CODEMapViewController.h"
 
-@interface CODEViewController : CODEBaseViewController<UITableViewDataSource, UITableViewDelegate>
+@interface CODEListViewController : CODEBaseViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *mainTableView;
+@property (nonatomic, strong) CODEMapViewController *codeMapViewController;
 
 
 
