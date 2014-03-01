@@ -12,12 +12,23 @@ tilde(csvPath, function (s) {
 	csvPath = s;
 });
 
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
 var ClassObject = Parse.Object.extend(className);
 
 csv()
 .from.stream(fs.createReadStream(csvPath))
 .to.array(function (rows) {
 	var fields = rows[0];
+
+	for (var i = 0; i < fields.length; i++) {
+		if (isNumber(fields[i])) {
+			fields[i] = 'f' + fields[i];
+		}
+	}
+
 	var objectsToAdd = [];
 
 	for (var i = 1; i < rows.length; i++) {
@@ -28,7 +39,7 @@ csv()
 		for (var j = 0; j < row.length; j++) {
 			var value = row[j];
 			if (value) {
-				parseObject.set(fields[i], value);
+				parseObject.set(fields[j], value);
 				modified = true;
 			}
 		}
