@@ -8,9 +8,11 @@ var afterDate = Date.parse(process.argv[3]);
 console.log("Removing records created after " + afterDate);
 
 function deleteObjects(deleteCount) {
+	console.log("Deleted " + deleteCount + "…");
 	var query = new Parse.Query(className);
 	query.greaterThan("createdAt", afterDate);
 	query.limit(1000);
+	query.select([]);
 	return query.find()
 	.then(function (parseObjects) {
 		if (parseObjects.length > 0) {
