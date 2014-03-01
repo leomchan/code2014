@@ -20,6 +20,7 @@ if (firstDot >= 0) {
 }
 
 className = className.substring(0, 1).toUpperCase() + className.substring(1);
+console.log("Class Name:" + className);
 
 function isNumber(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
