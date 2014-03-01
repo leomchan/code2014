@@ -22,8 +22,8 @@ csv()
 			return countryQuery.first()
 			.then(function (info) {
 				if (info) {
-					var latitude = row[3];
-					var longitude = row[2];
+					var latitude = parseFloat(row[3]);
+					var longitude = parseFloat(row[2]);
 					var location = new Parse.GeoPoint(latitude, longitude);
 					info.set("location", location);
 					return info.save();
@@ -41,5 +41,12 @@ csv()
 		}
 	}
 
-	addGeoPointToCountryInfo(rows.slice(1));
+	addGeoPointToCountryInfo(rows.slice(1))
+	.then(function () {
+		console.log("Done.");
+		process.exit(0);
+	}, function (err) {
+		console.error(err);
+		process.exit(1);
+	});
 });
