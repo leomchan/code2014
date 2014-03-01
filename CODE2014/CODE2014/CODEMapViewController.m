@@ -139,12 +139,12 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
         calloutArrowImageView.frame = arrowFrame;
     }
     else {
+        calloutArrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"callout-arrow-top.png"]];
         calloutFrame.origin = CGPointMake(-calloutFrame.size.width / 2.0f + centerOffset, arrowFrame.size.height + view.frame.size.height);
         calloutView.frame = calloutFrame;
         
         arrowFrame.origin = CGPointMake(-arrowFrame.size.width / 2.0f + centerOffset, 1.0f + view.frame.size.height);
         calloutArrowImageView.frame = arrowFrame;
-        calloutArrowImageView.transform = CGAffineTransformMakeRotation(M_PI);
     }
     
     [view addSubview:calloutView];
