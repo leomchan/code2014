@@ -16,7 +16,7 @@ csv()
 .to.array(function (rows) {
 	function addGeoPointToCountryInfo(remainingRows) {
 		if (remainingRows.length > 0) {
-			var row = remainingRows.slice(0,1);
+			var row = remainingRows[0];
 			var countryQuery = new Parse.Query('CountryInfo');
 			countryQuery.equalTo("country", row[0]);
 			return countryQuery.first()
