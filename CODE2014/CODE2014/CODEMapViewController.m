@@ -8,6 +8,7 @@
 
 #import "CODEMapViewController.h"
 #import "CODEDataManager.h"
+#import "CODEListViewController.h"
 
 @interface CODEMapViewController ()
 @property (nonatomic, strong) NSMutableArray *arrayOfCountries;
@@ -64,6 +65,25 @@
 	// Do any additional setup after loading the view.
 }
 
+- (void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (self.selectedObject != nil){
+        
+        PFGeoPoint *geoPoint = self.selectedObject[@"location"];
+        CLLocationCoordinate2D track;
+        track.latitude = geoPoint.latitude;
+        track.longitude = geoPoint.longitude;
+        
+        MKCoordinateRegion region;
+        MKCoordinateSpan span;
+        span.latitudeDelta = 5;
+        span.longitudeDelta = 5;
+        region.span = span;
+        region.center = track;
+        [self.mapView setRegion:region];
+        
+    }
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -76,13 +96,17 @@
     annotationView.canShowCallout = YES;
     annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     
-    if (annotationView == nil)
-        CODEDebugLog(@"test");
-    
     return annotationView;
 }
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
     [self performSegueWithIdentifier:@"CODEPushToInfo" sender:self];
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"CODEPushToList"]){
+        CODEListViewController *controller = segue.destinationViewController;
+        controller.codeMapViewController = self;
+    }
 }
 @end

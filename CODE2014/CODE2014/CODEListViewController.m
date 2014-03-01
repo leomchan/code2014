@@ -9,11 +9,10 @@
 #import "CODEListViewController.h"
 #import "CODEDataManager.h"
 #import <CoreLocation/CoreLocation.h>
-#import "CODEMapViewController.h"
 #import <AddressBook/AddressBook.h>
 
 @interface CODEListViewController ()
-@property (nonatomic, strong) NSArray *arrayOfCountries;
+@property (nonatomic, strong) NSMutableArray *arrayOfCountries;
 
 @property (nonatomic, strong) CLPlacemark *selectedPlacemark;
 @end
@@ -23,10 +22,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.arrayOfCountries  = [NSArray array];
+    self.arrayOfCountries  = [NSMutableArray array];
     [[CODEDataManager manager] getApplicableCountriesWithBlock:^(NSArray *items, NSError *error) {
         
-        self.arrayOfCountries = items;
+        for (PFObject *object in items){
+            PFGeoPoint *geoPoint = object[@"location"];
+            if (geoPoint != nil){
+                [self.arrayOfCountries addObject:object];
+            }
+        }
         [self.mainTableView reloadData];
        // self.arrayOfCountries = [[set allObjects] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     }];
@@ -49,18 +53,21 @@
     
     UITableViewCell *tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TEST"];
     PFObject *object = [self.arrayOfCountries objectAtIndex:indexPath.row];
-    NSString *string = object[@"englishName"];
+    NSString *string = @"";
+    if (object[@"englishName"] != nil){
+       string = object[@"englishName"];
+    }else {
+        string = object[@"countryCode"];
+    }
+    
     tableViewCell.textLabel.text = string;
     return tableViewCell;
 }
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    PFObject *object = [self.arrayOfCountries objectAtIndex:indexPath.row];
+    self.codeMapViewController.selectedObject = object;
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 
-}
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"CODEPushToMap"]){
-        CODEMapViewController *controller = segue.destinationViewController;
-        controller.selectedPlacemark = self.selectedPlacemark;
-    }
-}
 
 @end

@@ -12,7 +12,7 @@
 
 @interface CODEMapViewController : CODEBaseViewController<MKMapViewDelegate>
 
-@property (nonatomic, strong) CLPlacemark *selectedPlacemark;
+@property (nonatomic, strong) PFObject *selectedObject;
 @property (nonatomic, weak) IBOutlet MKMapView * mapView;
 
 @end
