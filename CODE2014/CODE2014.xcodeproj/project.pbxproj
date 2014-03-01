@@ -429,7 +429,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "CABC6438-D8A8-4102-BF11-61BB6D3CB63C";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -475,7 +475,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/allanchu/Workspace/code2014/CODE2014/External,
+					"$(SRCROOT)/External",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CODE2014/CODE2014-Prefix.pch";
@@ -492,7 +492,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/allanchu/Workspace/code2014/CODE2014/External,
+					"$(SRCROOT)/External",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CODE2014/CODE2014-Prefix.pch";
