@@ -9,10 +9,10 @@
 #import "CODEMapViewController.h"
 #import "CODEDataManager.h"
 #import "CODECalloutView.h"
-#import "CODEListViewController.h"
 
 NSString * const CODEMapViewControllerCountryAnnotationIdentifier = @"country";
 NSString * const CODEMapViewControllerPushToInfoSegueIdentifier = @"CODEPushToInfo";
+NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToList";
 
 @interface CODEMapViewController ()
 @property (nonatomic, strong) NSMutableArray *arrayOfCountries;
@@ -150,8 +150,19 @@ NSString * const CODEMapViewControllerPushToInfoSegueIdentifier = @"CODEPushToIn
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"CODEPushToList"]){
         CODEListViewController *controller = segue.destinationViewController;
-        controller.codeMapViewController = self;
+        controller.delegate = self;
     }
+}
+
+/******************************************************************************/
+/******************************************************************************/
+/******************************************************************************/
+
+#pragma mark - CODEListViewControllerDelegate
+
+- (void)listViewController:(CODEListViewController *)controller didSelectCountryInfo:(PFObject *)countryInfo
+{
+    self.selectedObject = countryInfo;
 }
 
 @end

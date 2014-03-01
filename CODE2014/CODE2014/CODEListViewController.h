@@ -8,13 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "CODEBaseViewController.h"
-#import "CODEMapViewController.h"
+
+@class CODEListViewController;
+
+@protocol CODEListViewControllerDelegate <NSObject>
+
+- (void)listViewController:(CODEListViewController *)controller didSelectCountryInfo:(PFObject *)countryInfo;
+
+@end
 
 @interface CODEListViewController : CODEBaseViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *mainTableView;
-@property (nonatomic, strong) CODEMapViewController *codeMapViewController;
-
-
+@property (nonatomic, weak) id<CODEListViewControllerDelegate> delegate;
 
 @end

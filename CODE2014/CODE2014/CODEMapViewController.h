@@ -9,8 +9,9 @@
 #import "CODEBaseViewController.h"
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
+#import "CODEListViewController.h"
 
-@interface CODEMapViewController : CODEBaseViewController<MKMapViewDelegate>
+@interface CODEMapViewController : CODEBaseViewController<MKMapViewDelegate, CODEListViewControllerDelegate>
 
 @property (nonatomic, strong) PFObject *selectedObject;
 @property (nonatomic, weak) IBOutlet MKMapView * mapView;

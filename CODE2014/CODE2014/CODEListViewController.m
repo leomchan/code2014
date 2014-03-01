@@ -65,7 +65,7 @@
 }
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     PFObject *object = [self.arrayOfCountries objectAtIndex:indexPath.row];
-    self.codeMapViewController.selectedObject = object;
+    [self.delegate listViewController:self didSelectCountryInfo:object];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
