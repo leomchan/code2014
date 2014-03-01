@@ -37,7 +37,7 @@ exportedGoodsQuery.each (
 		else {
 			var englishName = result.get("Country_Name_Eng");
 			var frenchName = result.get("Country_Name_Fre");
-			countries[country] = {"country":country, "englishName":englishName, "frenchName":frenchName, "GoodsValue":value, "FinancialAmount":0};
+			countries[country] = {"country":country, "englishName":englishName, "frenchName":frenchName, "goodsValue":value, "financialAmount":0};
 
 		}
 
@@ -93,7 +93,7 @@ financialResourcesQuery.each (
 		else {
 			var englishName = result.get("Country_Name_Eng");
 			var frenchName = result.get("Country_Name_Fre");
-			countries[country] = {"country":country, "englishName":englishName, "frenchName":frenchName, "GoodsValue":0, "FinancialAmount":amount};
+			countries[country] = {"country":country, "englishName":englishName, "frenchName":frenchName, "goodsValue":0, "financialAmount":amount};
 
 		}
 
