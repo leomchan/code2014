@@ -67,17 +67,17 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     PFObject *object = [self.arrayOfCountries objectAtIndex:indexPath.row];
-    NSString *string = object[@"Country_Name_Eng"];
+    NSString *string = object[@"Country"];
     
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder geocodeAddressString:string completionHandler:^(NSArray *placemarks, NSError *error) {
+    [geocoder geocodeAddressDictionary:@{(NSString *)kABPersonAddressCountryCodeKey:string} completionHandler:^(NSArray *placemarks, NSError *error) {
         if ([placemarks count] != 0){
             CLPlacemark *placemark = [placemarks firstObject];
          
             
-            CODEDebugLog(@"%@ %@,%f,%f",object[@"Country"], string, placemark.location.coordinate.longitude, placemark.location.coordinate.latitude);
+            CODEDebugLog(@"%@,%@,%f,%f", string,object[@"Country_Name_Eng"], placemark.location.coordinate.longitude, placemark.location.coordinate.latitude);
             self.selectedPlacemark = placemark;
-           // [self performSegueWithIdentifier:@"CODEPushToMap" sender:self];
+            [self performSegueWithIdentifier:@"CODEPushToMap" sender:self];
         }
     }];
 }

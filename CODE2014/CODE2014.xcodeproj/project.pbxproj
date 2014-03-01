@@ -18,6 +18,8 @@
 		F8EF274C18C245CE00598794 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8EF274B18C245CE00598794 /* SystemConfiguration.framework */; };
 		F8EF274F18C2534500598794 /* CODEMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EF274E18C2534500598794 /* CODEMapViewController.m */; };
 		F8EF275118C253FD00598794 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8EF275018C253FD00598794 /* MapKit.framework */; };
+		F8EF275418C2795100598794 /* CODEPieChartInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EF275318C2795100598794 /* CODEPieChartInfoViewController.m */; };
+		F8EF275718C2810500598794 /* CODEPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EF275618C2810500598794 /* CODEPieChart.m */; };
 		F8F11DC518C1ADA400AD6890 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F11DC418C1ADA400AD6890 /* Foundation.framework */; };
 		F8F11DC718C1ADA400AD6890 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F11DC618C1ADA400AD6890 /* CoreGraphics.framework */; };
 		F8F11DC918C1ADA400AD6890 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F11DC818C1ADA400AD6890 /* UIKit.framework */; };
@@ -60,6 +62,10 @@
 		F8EF274D18C2534500598794 /* CODEMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CODEMapViewController.h; sourceTree = "<group>"; };
 		F8EF274E18C2534500598794 /* CODEMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CODEMapViewController.m; sourceTree = "<group>"; };
 		F8EF275018C253FD00598794 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		F8EF275218C2795100598794 /* CODEPieChartInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CODEPieChartInfoViewController.h; sourceTree = "<group>"; };
+		F8EF275318C2795100598794 /* CODEPieChartInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CODEPieChartInfoViewController.m; sourceTree = "<group>"; };
+		F8EF275518C2810500598794 /* CODEPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CODEPieChart.h; sourceTree = "<group>"; };
+		F8EF275618C2810500598794 /* CODEPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CODEPieChart.m; sourceTree = "<group>"; };
 		F8F11DC118C1ADA400AD6890 /* CODE2014.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CODE2014.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F11DC418C1ADA400AD6890 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F8F11DC618C1ADA400AD6890 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -121,6 +127,8 @@
 			children = (
 				F8EF273518C23D0100598794 /* CODEBaseViewController.h */,
 				F8EF273618C23D0100598794 /* CODEBaseViewController.m */,
+				F8EF275518C2810500598794 /* CODEPieChart.h */,
+				F8EF275618C2810500598794 /* CODEPieChart.m */,
 			);
 			name = "Base Class";
 			sourceTree = "<group>";
@@ -184,6 +192,8 @@
 				F8F11DD618C1ADA400AD6890 /* Main.storyboard */,
 				F8F11DD918C1ADA400AD6890 /* CODEViewController.h */,
 				F8F11DDA18C1ADA400AD6890 /* CODEViewController.m */,
+				F8EF275218C2795100598794 /* CODEPieChartInfoViewController.h */,
+				F8EF275318C2795100598794 /* CODEPieChartInfoViewController.m */,
 				F8EF274D18C2534500598794 /* CODEMapViewController.h */,
 				F8EF274E18C2534500598794 /* CODEMapViewController.m */,
 				F8F11DDC18C1ADA400AD6890 /* Images.xcassets */,
@@ -329,7 +339,9 @@
 			files = (
 				F8EF273718C23D0100598794 /* CODEBaseViewController.m in Sources */,
 				F8F11DDB18C1ADA400AD6890 /* CODEViewController.m in Sources */,
+				F8EF275418C2795100598794 /* CODEPieChartInfoViewController.m in Sources */,
 				F8EF274F18C2534500598794 /* CODEMapViewController.m in Sources */,
+				F8EF275718C2810500598794 /* CODEPieChart.m in Sources */,
 				F8F11DD118C1ADA400AD6890 /* main.m in Sources */,
 				F8EF273C18C23DDE00598794 /* CODEDataManager.m in Sources */,
 				F8F11DD518C1ADA400AD6890 /* CODEAppDelegate.m in Sources */,

@@ -14,6 +14,7 @@
 
 @interface CODEAnnotation : NSObject <MKAnnotation>
 @property (nonatomic)CLLocationCoordinate2D coordinate;
+@property (nonatomic, copy) NSString *title;
 @end
 
 @implementation CODEAnnotation
@@ -45,7 +46,7 @@
         
         CODEAnnotation *annotation = [[CODEAnnotation alloc] init];
         annotation.coordinate = self.selectedPlacemark.location.coordinate;
-        
+        annotation.title = @"TEST";
         [self.mapView addAnnotation:annotation];
     }
 	// Do any additional setup after loading the view.
@@ -57,4 +58,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
+{
+    MKAnnotationView *annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"loc"];
+    annotationView.canShowCallout = YES;
+    annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    
+    return annotationView;
+}
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+{
+    [self performSegueWithIdentifier:@"CODEPushToInfo" sender:self];
+}
 @end
