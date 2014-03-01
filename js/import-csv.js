@@ -4,13 +4,22 @@ var Parse = config.Parse;
 var fs = require('fs');
 var tilde = require('tilde-expansion');
 var csv = require('csv');
+var path = require('path');
 
-var className = process.argv[2];
-var csvPath = process.argv[3];
+var csvPath = process.argv[2];
+
 
 tilde(csvPath, function (s) {
 	csvPath = s;
 });
+
+var className = path.basename(csvPath);
+var firstDot = className.indexOf('.');
+if (firstDot >= 0) {
+	className = className.substring(0, className.indexOf('.'));	
+}
+
+className = className.substring(0, 1).toUpperCase() + className.substring(1);
 
 function isNumber(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
