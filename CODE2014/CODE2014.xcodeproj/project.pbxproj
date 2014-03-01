@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		81EF0B8A18C2942300B73203 /* CODECalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 81EF0B8918C2942300B73203 /* CODECalloutView.m */; };
+		81EF0B8C18C2947700B73203 /* CODECalloutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81EF0B8B18C2947700B73203 /* CODECalloutView.xib */; };
+		81EF0BC318C29AFE00B73203 /* callout-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 81EF0BBF18C29AFE00B73203 /* callout-arrow.png */; };
+		81EF0BC418C29AFE00B73203 /* callout-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81EF0BC018C29AFE00B73203 /* callout-arrow@2x.png */; };
+		81EF0BC518C29AFE00B73203 /* callout.png in Resources */ = {isa = PBXBuildFile; fileRef = 81EF0BC118C29AFE00B73203 /* callout.png */; };
+		81EF0BC618C29AFE00B73203 /* callout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81EF0BC218C29AFE00B73203 /* callout@2x.png */; };
 		F8EF273718C23D0100598794 /* CODEBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EF273618C23D0100598794 /* CODEBaseViewController.m */; };
 		F8EF273C18C23DDE00598794 /* CODEDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EF273B18C23DDE00598794 /* CODEDataManager.m */; };
 		F8EF273E18C2453000598794 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8EF273D18C2453000598794 /* AVFoundation.framework */; };
@@ -48,6 +54,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		81EF0B8818C2942300B73203 /* CODECalloutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CODECalloutView.h; sourceTree = "<group>"; };
+		81EF0B8918C2942300B73203 /* CODECalloutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CODECalloutView.m; sourceTree = "<group>"; };
+		81EF0B8B18C2947700B73203 /* CODECalloutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CODECalloutView.xib; sourceTree = "<group>"; };
+		81EF0BBF18C29AFE00B73203 /* callout-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "callout-arrow.png"; sourceTree = "<group>"; };
+		81EF0BC018C29AFE00B73203 /* callout-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "callout-arrow@2x.png"; sourceTree = "<group>"; };
+		81EF0BC118C29AFE00B73203 /* callout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = callout.png; sourceTree = "<group>"; };
+		81EF0BC218C29AFE00B73203 /* callout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "callout@2x.png"; sourceTree = "<group>"; };
 		F8EF273518C23D0100598794 /* CODEBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CODEBaseViewController.h; sourceTree = "<group>"; };
 		F8EF273618C23D0100598794 /* CODEBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CODEBaseViewController.m; sourceTree = "<group>"; };
 		F8EF273A18C23DDE00598794 /* CODEDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CODEDataManager.h; sourceTree = "<group>"; };
@@ -122,6 +135,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		81EF0BBE18C29AFE00B73203 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				81EF0BBF18C29AFE00B73203 /* callout-arrow.png */,
+				81EF0BC018C29AFE00B73203 /* callout-arrow@2x.png */,
+				81EF0BC118C29AFE00B73203 /* callout.png */,
+				81EF0BC218C29AFE00B73203 /* callout@2x.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
 		F8EF273818C23D0600598794 /* Base Class */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +209,7 @@
 		F8F11DCA18C1ADA400AD6890 /* CODE2014 */ = {
 			isa = PBXGroup;
 			children = (
+				81EF0BBE18C29AFE00B73203 /* images */,
 				F8EF273918C23DCB00598794 /* Data Manager */,
 				F8EF273818C23D0600598794 /* Base Class */,
 				F8F11DD318C1ADA400AD6890 /* CODEAppDelegate.h */,
@@ -196,6 +221,9 @@
 				F8EF275318C2795100598794 /* CODEPieChartInfoViewController.m */,
 				F8EF274D18C2534500598794 /* CODEMapViewController.h */,
 				F8EF274E18C2534500598794 /* CODEMapViewController.m */,
+				81EF0B8818C2942300B73203 /* CODECalloutView.h */,
+				81EF0B8918C2942300B73203 /* CODECalloutView.m */,
+				81EF0B8B18C2947700B73203 /* CODECalloutView.xib */,
 				F8F11DDC18C1ADA400AD6890 /* Images.xcassets */,
 				F8F11DCB18C1ADA400AD6890 /* Supporting Files */,
 			);
@@ -316,9 +344,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81EF0BC318C29AFE00B73203 /* callout-arrow.png in Resources */,
+				81EF0B8C18C2947700B73203 /* CODECalloutView.xib in Resources */,
+				81EF0BC518C29AFE00B73203 /* callout.png in Resources */,
 				F8F11DDD18C1ADA400AD6890 /* Images.xcassets in Resources */,
 				F8F11DCF18C1ADA400AD6890 /* InfoPlist.strings in Resources */,
 				F8F11DD818C1ADA400AD6890 /* Main.storyboard in Resources */,
+				81EF0BC418C29AFE00B73203 /* callout-arrow@2x.png in Resources */,
+				81EF0BC618C29AFE00B73203 /* callout@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +374,7 @@
 				F8F11DDB18C1ADA400AD6890 /* CODEViewController.m in Sources */,
 				F8EF275418C2795100598794 /* CODEPieChartInfoViewController.m in Sources */,
 				F8EF274F18C2534500598794 /* CODEMapViewController.m in Sources */,
+				81EF0B8A18C2942300B73203 /* CODECalloutView.m in Sources */,
 				F8EF275718C2810500598794 /* CODEPieChart.m in Sources */,
 				F8F11DD118C1ADA400AD6890 /* main.m in Sources */,
 				F8EF273C18C23DDE00598794 /* CODEDataManager.m in Sources */,

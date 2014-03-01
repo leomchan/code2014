@@ -8,6 +8,10 @@
 
 #import "CODEMapViewController.h"
 #import "CODEDataManager.h"
+#import "CODECalloutView.h"
+
+NSString * const CODEMapViewControllerCountryAnnotationIdentifier = @"country";
+NSString * const CODEMapViewControllerPushToInfoSegueIdentifier = @"CODEPushToInfo";
 
 @interface CODEMapViewController ()
 @property (nonatomic, strong) NSMutableArray *arrayOfCountries;
@@ -50,13 +54,12 @@
                 CODEAnnotation *annotation = [[CODEAnnotation alloc] init];
                 annotation.coordinate = CLLocationCoordinate2DMake(geoPoint.latitude, geoPoint.longitude);
                 CODEDebugLog(@"%@",object);
-                annotation.title = object[@"countryCode"];
+                annotation.title = [object[@"englishName"] capitalizedString];
                 [annotationsToAdd addObject:annotation];
             }
         }
         
         [self.mapView addAnnotations:annotationsToAdd];
-        // self.arrayOfCountries = [[set allObjects] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     }];
     
     
@@ -72,17 +75,45 @@
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
 {
-    MKAnnotationView *annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"loc"];
-    annotationView.canShowCallout = YES;
-    annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    
-    if (annotationView == nil)
-        CODEDebugLog(@"test");
+    MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:CODEMapViewControllerCountryAnnotationIdentifier];
+    if (!annotationView) {
+        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:CODEMapViewControllerCountryAnnotationIdentifier];
+    }
+    else {
+        annotationView.annotation = annotation;
+    }
     
     return annotationView;
 }
+
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
-    [self performSegueWithIdentifier:@"CODEPushToInfo" sender:self];
+    [self performSegueWithIdentifier:CODEMapViewControllerPushToInfoSegueIdentifier sender:self];
 }
+
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
+{
+    const CGFloat centerOffset = 8.0f;
+    
+    CODECalloutView *calloutView = [[[NSBundle mainBundle] loadNibNamed:@"CODECalloutView" owner:self options:nil] objectAtIndex:0];
+    UIImageView *calloutArrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"callout-arrow.png"]];
+    CGRect arrowFrame = calloutArrowImageView.frame;
+    CGRect calloutFrame = calloutView.frame;
+    calloutFrame.origin = CGPointMake(-calloutFrame.size.width / 2.0f + centerOffset, -calloutFrame.size.height - arrowFrame.size.height);
+    calloutView.frame = calloutFrame;
+    [view addSubview:calloutView];
+    
+    arrowFrame.origin = CGPointMake(-arrowFrame.size.width / 2.0f + centerOffset, -arrowFrame.size.height - 1.0f);
+    calloutArrowImageView.frame = arrowFrame;
+    [view addSubview:calloutArrowImageView];
+    
+}
+
+- (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view
+{
+    for (UIView *subview in view.subviews) {
+        [subview removeFromSuperview];
+    }
+}
+
 @end
