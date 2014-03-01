@@ -36,9 +36,9 @@
         
         endAngle = startAngle + anglePerPie;
         
-        CGContextAddArc(ctx, 160, 160, 20, startAngle, endAngle, false);
+        CGContextAddArc(ctx, 160, 160, 60, startAngle, endAngle, false);
         CGContextSetStrokeColorWithColor(ctx,color.CGColor);
-        CGContextSetLineWidth(ctx, 140);
+        CGContextSetLineWidth(ctx, 120);
         CGContextStrokePath(ctx);
         startAngle = endAngle;
     }

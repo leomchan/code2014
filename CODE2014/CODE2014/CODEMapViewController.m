@@ -7,9 +7,10 @@
 //
 
 #import "CODEMapViewController.h"
+#import "CODEDataManager.h"
 
 @interface CODEMapViewController ()
-
+@property (nonatomic, strong) NSMutableArray *arrayOfCountries;
 @end
 
 @interface CODEAnnotation : NSObject <MKAnnotation>
@@ -34,21 +35,32 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if (self.selectedPlacemark != nil){
-        [self.mapView setCenterCoordinate:[self.selectedPlacemark.location coordinate] animated:NO];
-        MKCoordinateRegion region;
-        [self.mapView setZoomEnabled:YES];
-        region.center.latitude = self.selectedPlacemark.location.coordinate.latitude;
-        region.center.longitude = self.selectedPlacemark.location.coordinate.latitude;
-        region.span.latitudeDelta = 5;
-        region.span.longitudeDelta = 5;
-       // self.mapView.region = region;
+    
+    self.arrayOfCountries  = [NSMutableArray array];
+    
+    [self.mapView setZoomEnabled:YES];
+    [[CODEDataManager manager] getApplicableCountriesWithBlock:^(NSArray *items, NSError *error) {
         
-        CODEAnnotation *annotation = [[CODEAnnotation alloc] init];
-        annotation.coordinate = self.selectedPlacemark.location.coordinate;
-        annotation.title = @"TEST";
-        [self.mapView addAnnotation:annotation];
-    }
+        self.arrayOfCountries = [NSMutableArray arrayWithArray:items];
+        
+        NSMutableArray *annotationsToAdd = [NSMutableArray array];
+        for (PFObject *object in self.arrayOfCountries){
+            PFGeoPoint *geoPoint = object[@"location"];
+            if (geoPoint != nil){
+                CODEAnnotation *annotation = [[CODEAnnotation alloc] init];
+                annotation.coordinate = CLLocationCoordinate2DMake(geoPoint.latitude, geoPoint.longitude);
+                CODEDebugLog(@"%@",object);
+                annotation.title = object[@"countryCode"];
+                [annotationsToAdd addObject:annotation];
+            }
+        }
+        
+        [self.mapView addAnnotations:annotationsToAdd];
+        // self.arrayOfCountries = [[set allObjects] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    }];
+    
+    
+    
 	// Do any additional setup after loading the view.
 }
 
@@ -63,6 +75,9 @@
     MKAnnotationView *annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"loc"];
     annotationView.canShowCallout = YES;
     annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    
+    if (annotationView == nil)
+        CODEDebugLog(@"test");
     
     return annotationView;
 }

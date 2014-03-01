@@ -24,21 +24,10 @@
 {
     [super viewDidLoad];
     self.arrayOfCountries  = [NSArray array];
-    NSMutableArray *arrayOfData = [NSMutableArray array];
     [[CODEDataManager manager] getApplicableCountriesWithBlock:^(NSArray *items, NSError *error) {
-        NSMutableSet *set = [NSMutableSet set];
-
-        for (PFObject *object in items) {
-            if (![set containsObject:object[@"Country_Name_Eng"]]){
-                [set addObject:object[@"Country_Name_Eng"]];
-                [arrayOfData addObject:object];
-            }
-        }
         
-        self.arrayOfCountries = arrayOfData;
+        self.arrayOfCountries = items;
         [self.mainTableView reloadData];
-
-     
        // self.arrayOfCountries = [[set allObjects] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     }];
 	// Do any additional setup after loading the view, typically from a nib.
@@ -60,7 +49,7 @@
     
     UITableViewCell *tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TEST"];
     PFObject *object = [self.arrayOfCountries objectAtIndex:indexPath.row];
-    NSString *string = object[@"Country_Name_Eng"];
+    NSString *string = object[@"englishName"];
     tableViewCell.textLabel.text = string;
     return tableViewCell;
 }

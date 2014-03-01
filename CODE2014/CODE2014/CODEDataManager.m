@@ -34,9 +34,9 @@ static CODEDataManager *manager = nil;
 
 - (void) getApplicableCountriesWithBlock:(CODEDataRetrievalBlock) block{
     
-    PFQuery *query = [PFQuery queryWithClassName:@"Country"];
-    [query whereKeyExists:@"Country_Name_Eng"];
+    PFQuery *query = [PFQuery queryWithClassName:@"CountryInfo"];
     [query setLimit:1000];
+    [query orderByAscending:@"englishName"];
     [query setCachePolicy:kPFCachePolicyNetworkOnly];
     [self findAllObjectsWithQuery:query withBlock:block];
 }
@@ -57,9 +57,9 @@ static CODEDataManager *manager = nil;
                 NSInteger skip = [query skip];
                 skip+= 1000;
                 
-                PFQuery *query = [PFQuery queryWithClassName:@"Country"];
-                [query whereKeyExists:@"Country_Name_Eng"];
+                PFQuery *query = [PFQuery queryWithClassName:@"CountryInfo"];
                 [query setSkip:skip];
+                [query orderByAscending:@"englishName"];
                 [query setLimit:1000];
                 // Go get more results
                 [self findAllObjectsWithQuery:query withBlock:block];
