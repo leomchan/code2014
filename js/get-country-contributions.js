@@ -29,7 +29,7 @@ exportedGoodsQuery.each (
 
 		if (country in countries) {
 			//add the value to ehre
-			var oldValue = countries[country].Value;
+			var oldValue = countries[country].GoodsValue;
 			countries[country].GoodsValue = oldValue + value;
 
 
@@ -67,10 +67,10 @@ var financialResourcesQuery = new Parse.Query(financialResources);
 financialResourcesQuery.each (
 	function (result) {
 		var country = result.get("Country");
-		var value = result.get("Value");
-		if (value == undefined)
+		var amount = result.get("Amount");
+		if (amount == undefined)
 			return;
-		value = parseFloat(value);
+		amount = parseFloat(amount);
 
 
 		if (country == undefined)
@@ -85,8 +85,8 @@ financialResourcesQuery.each (
 
 		if (country in countries) {
 			//add the value to ehre
-			var oldValue = countries[country].Value;
-			countries[country].GoodsValue = oldValue + value;
+			var oldAmount = countries[country].FinancialAmount;
+			countries[country].FinancialAmount = oldAmount + amount;
 
 
 		}
