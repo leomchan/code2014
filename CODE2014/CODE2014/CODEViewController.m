@@ -7,9 +7,15 @@
 //
 
 #import "CODEViewController.h"
+#import "CODEDataManager.h"
+#import <CoreLocation/CoreLocation.h>
+#import "CODEMapViewController.h"
+#import <AddressBook/AddressBook.h>
 
 @interface CODEViewController ()
+@property (nonatomic, strong) NSArray *arrayOfCountries;
 
+@property (nonatomic, strong) CLPlacemark *selectedPlacemark;
 @end
 
 @implementation CODEViewController
@@ -17,6 +23,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.arrayOfCountries  = [NSArray array];
+    NSMutableArray *arrayOfData = [NSMutableArray array];
+    [[CODEDataManager manager] getApplicableCountriesWithBlock:^(NSArray *items, NSError *error) {
+        NSMutableSet *set = [NSMutableSet set];
+
+        for (PFObject *object in items) {
+            if (![set containsObject:object[@"Country_Name_Eng"]]){
+                [set addObject:object[@"Country_Name_Eng"]];
+                [arrayOfData addObject:object];
+            }
+        }
+        
+        self.arrayOfCountries = arrayOfData;
+        [self.mainTableView reloadData];
+
+     
+       // self.arrayOfCountries = [[set allObjects] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    }];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -24,6 +48,44 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.arrayOfCountries count];
+}
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell *tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TEST"];
+    PFObject *object = [self.arrayOfCountries objectAtIndex:indexPath.row];
+    NSString *string = object[@"Country_Name_Eng"];
+    tableViewCell.textLabel.text = string;
+    return tableViewCell;
+}
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    PFObject *object = [self.arrayOfCountries objectAtIndex:indexPath.row];
+    NSString *string = object[@"Country_Name_Eng"];
+    
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder geocodeAddressString:string completionHandler:^(NSArray *placemarks, NSError *error) {
+        if ([placemarks count] != 0){
+            CLPlacemark *placemark = [placemarks firstObject];
+         
+            
+            CODEDebugLog(@"%@ %@,%f,%f",object[@"Country"], string, placemark.location.coordinate.longitude, placemark.location.coordinate.latitude);
+            self.selectedPlacemark = placemark;
+           // [self performSegueWithIdentifier:@"CODEPushToMap" sender:self];
+        }
+    }];
+}
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"CODEPushToMap"]){
+        CODEMapViewController *controller = segue.destinationViewController;
+        controller.selectedPlacemark = self.selectedPlacemark;
+    }
 }
 
 @end

@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CODEBaseViewController.h"
 
-@interface CODEViewController : UIViewController
+@interface CODEViewController : CODEBaseViewController<UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, weak) IBOutlet UITableView *mainTableView;
+
+
 
 @end
