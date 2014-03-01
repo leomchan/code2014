@@ -24,7 +24,14 @@ csv()
 	var fields = rows[0];
 
 	for (var i = 0; i < fields.length; i++) {
-		if (isNumber(fields[i])) {
+		fields[i] = fields[i].trim();
+
+		// Remove anything that is not a digit or letter
+		fields[i] = fields[i].replace(/[^a-zA-Z0-9]/g,'_');
+		fields[i] = fields[i].replace(/_+/g,'_');
+		fields[i] = fields[i].replace(/^_+/g, '');
+		fields[i] = fields[i].replace(/_+$/g, '');
+		if (isNumber(fields[i].substring(0,1))) {
 			fields[i] = 'f' + fields[i];
 		}
 	}
