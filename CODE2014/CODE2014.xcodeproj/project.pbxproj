@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F8EF273718C23D0100598794 /* CODEBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EF273618C23D0100598794 /* CODEBaseViewController.m */; };
+		F8EF273C18C23DDE00598794 /* CODEDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EF273B18C23DDE00598794 /* CODEDataManager.m */; };
+		F8EF273E18C2453000598794 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8EF273D18C2453000598794 /* AVFoundation.framework */; };
+		F8EF274018C2454300598794 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8EF273F18C2454300598794 /* CFNetwork.framework */; };
+		F8EF274218C2455900598794 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8EF274118C2455900598794 /* CoreLocation.framework */; };
+		F8EF274418C2457B00598794 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8EF274318C2457B00598794 /* CoreAudio.framework */; };
+		F8EF274718C2458500598794 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8EF274518C2458500598794 /* AudioToolbox.framework */; };
+		F8EF274A18C245B800598794 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8EF274918C245B800598794 /* MobileCoreServices.framework */; };
+		F8EF274C18C245CE00598794 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8EF274B18C245CE00598794 /* SystemConfiguration.framework */; };
+		F8EF274F18C2534500598794 /* CODEMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EF274E18C2534500598794 /* CODEMapViewController.m */; };
+		F8EF275118C253FD00598794 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8EF275018C253FD00598794 /* MapKit.framework */; };
 		F8F11DC518C1ADA400AD6890 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F11DC418C1ADA400AD6890 /* Foundation.framework */; };
 		F8F11DC718C1ADA400AD6890 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F11DC618C1ADA400AD6890 /* CoreGraphics.framework */; };
 		F8F11DC918C1ADA400AD6890 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F11DC818C1ADA400AD6890 /* UIKit.framework */; };
@@ -35,6 +46,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F8EF273518C23D0100598794 /* CODEBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CODEBaseViewController.h; sourceTree = "<group>"; };
+		F8EF273618C23D0100598794 /* CODEBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CODEBaseViewController.m; sourceTree = "<group>"; };
+		F8EF273A18C23DDE00598794 /* CODEDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CODEDataManager.h; sourceTree = "<group>"; };
+		F8EF273B18C23DDE00598794 /* CODEDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CODEDataManager.m; sourceTree = "<group>"; };
+		F8EF273D18C2453000598794 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		F8EF273F18C2454300598794 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		F8EF274118C2455900598794 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		F8EF274318C2457B00598794 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		F8EF274518C2458500598794 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		F8EF274918C245B800598794 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		F8EF274B18C245CE00598794 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		F8EF274D18C2534500598794 /* CODEMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CODEMapViewController.h; sourceTree = "<group>"; };
+		F8EF274E18C2534500598794 /* CODEMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CODEMapViewController.m; sourceTree = "<group>"; };
+		F8EF275018C253FD00598794 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		F8F11DC118C1ADA400AD6890 /* CODE2014.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CODE2014.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F11DC418C1ADA400AD6890 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F8F11DC618C1ADA400AD6890 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -63,6 +88,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8EF275118C253FD00598794 /* MapKit.framework in Frameworks */,
+				F8EF274C18C245CE00598794 /* SystemConfiguration.framework in Frameworks */,
+				F8EF274A18C245B800598794 /* MobileCoreServices.framework in Frameworks */,
+				F8EF274718C2458500598794 /* AudioToolbox.framework in Frameworks */,
+				F8EF274418C2457B00598794 /* CoreAudio.framework in Frameworks */,
+				F8EF274218C2455900598794 /* CoreLocation.framework in Frameworks */,
+				F8EF274018C2454300598794 /* CFNetwork.framework in Frameworks */,
+				F8EF273E18C2453000598794 /* AVFoundation.framework in Frameworks */,
 				F8F11DFC18C1AF9100AD6890 /* Parse.framework in Frameworks */,
 				F8F11DC718C1ADA400AD6890 /* CoreGraphics.framework in Frameworks */,
 				F8F11DC918C1ADA400AD6890 /* UIKit.framework in Frameworks */,
@@ -83,6 +116,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F8EF273818C23D0600598794 /* Base Class */ = {
+			isa = PBXGroup;
+			children = (
+				F8EF273518C23D0100598794 /* CODEBaseViewController.h */,
+				F8EF273618C23D0100598794 /* CODEBaseViewController.m */,
+			);
+			name = "Base Class";
+			sourceTree = "<group>";
+		};
+		F8EF273918C23DCB00598794 /* Data Manager */ = {
+			isa = PBXGroup;
+			children = (
+				F8EF273A18C23DDE00598794 /* CODEDataManager.h */,
+				F8EF273B18C23DDE00598794 /* CODEDataManager.m */,
+			);
+			name = "Data Manager";
+			sourceTree = "<group>";
+		};
 		F8F11DB818C1ADA400AD6890 = {
 			isa = PBXGroup;
 			children = (
@@ -106,6 +157,14 @@
 		F8F11DC318C1ADA400AD6890 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F8EF275018C253FD00598794 /* MapKit.framework */,
+				F8EF274B18C245CE00598794 /* SystemConfiguration.framework */,
+				F8EF274918C245B800598794 /* MobileCoreServices.framework */,
+				F8EF274518C2458500598794 /* AudioToolbox.framework */,
+				F8EF274318C2457B00598794 /* CoreAudio.framework */,
+				F8EF274118C2455900598794 /* CoreLocation.framework */,
+				F8EF273F18C2454300598794 /* CFNetwork.framework */,
+				F8EF273D18C2453000598794 /* AVFoundation.framework */,
 				F8F11DFB18C1AF9100AD6890 /* Parse.framework */,
 				F8F11DC418C1ADA400AD6890 /* Foundation.framework */,
 				F8F11DC618C1ADA400AD6890 /* CoreGraphics.framework */,
@@ -118,11 +177,15 @@
 		F8F11DCA18C1ADA400AD6890 /* CODE2014 */ = {
 			isa = PBXGroup;
 			children = (
+				F8EF273918C23DCB00598794 /* Data Manager */,
+				F8EF273818C23D0600598794 /* Base Class */,
 				F8F11DD318C1ADA400AD6890 /* CODEAppDelegate.h */,
 				F8F11DD418C1ADA400AD6890 /* CODEAppDelegate.m */,
 				F8F11DD618C1ADA400AD6890 /* Main.storyboard */,
 				F8F11DD918C1ADA400AD6890 /* CODEViewController.h */,
 				F8F11DDA18C1ADA400AD6890 /* CODEViewController.m */,
+				F8EF274D18C2534500598794 /* CODEMapViewController.h */,
+				F8EF274E18C2534500598794 /* CODEMapViewController.m */,
 				F8F11DDC18C1ADA400AD6890 /* Images.xcassets */,
 				F8F11DCB18C1ADA400AD6890 /* Supporting Files */,
 			);
@@ -264,8 +327,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8EF273718C23D0100598794 /* CODEBaseViewController.m in Sources */,
 				F8F11DDB18C1ADA400AD6890 /* CODEViewController.m in Sources */,
+				F8EF274F18C2534500598794 /* CODEMapViewController.m in Sources */,
 				F8F11DD118C1ADA400AD6890 /* main.m in Sources */,
+				F8EF273C18C23DDE00598794 /* CODEDataManager.m in Sources */,
 				F8F11DD518C1ADA400AD6890 /* CODEAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -333,7 +399,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Leo Chan (GFP2J743S9)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -351,7 +417,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "4916E40B-90FC-456F-94A2-3D948BE9C4A4";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -373,7 +439,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Leo Chan (GFP2J743S9)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -384,7 +450,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PROVISIONING_PROFILE = "4916E40B-90FC-456F-94A2-3D948BE9C4A4";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -485,6 +551,7 @@
 				F8F11DF518C1ADA500AD6890 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F8F11DF618C1ADA500AD6890 /* Build configuration list for PBXNativeTarget "CODE2014Tests" */ = {
 			isa = XCConfigurationList;
@@ -493,6 +560,7 @@
 				F8F11DF818C1ADA500AD6890 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
