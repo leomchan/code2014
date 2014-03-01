@@ -120,17 +120,34 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
     const CGFloat centerOffset = 8.0f;
+    const CGFloat spacingFromEdge = 8.0f;
     
     CODECalloutView *calloutView = [[[NSBundle mainBundle] loadNibNamed:@"CODECalloutView" owner:self options:nil] objectAtIndex:0];
     UIImageView *calloutArrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"callout-arrow.png"]];
+    
     CGRect arrowFrame = calloutArrowImageView.frame;
     CGRect calloutFrame = calloutView.frame;
-    calloutFrame.origin = CGPointMake(-calloutFrame.size.width / 2.0f + centerOffset, -calloutFrame.size.height - arrowFrame.size.height);
-    calloutView.frame = calloutFrame;
-    [view addSubview:calloutView];
+
+    CGSize calloutSize = CGSizeMake(calloutFrame.size.width, calloutFrame.size.height + arrowFrame.size.height);
     
-    arrowFrame.origin = CGPointMake(-arrowFrame.size.width / 2.0f + centerOffset, -arrowFrame.size.height - 1.0f);
-    calloutArrowImageView.frame = arrowFrame;
+    // Does it fit above?
+    if (view.frame.origin.y - calloutSize.height > spacingFromEdge) {
+        calloutFrame.origin = CGPointMake(-calloutFrame.size.width / 2.0f + centerOffset, -calloutFrame.size.height - arrowFrame.size.height);
+        calloutView.frame = calloutFrame;
+        
+        arrowFrame.origin = CGPointMake(-arrowFrame.size.width / 2.0f + centerOffset, -arrowFrame.size.height - 1.0f);
+        calloutArrowImageView.frame = arrowFrame;
+    }
+    else {
+        calloutFrame.origin = CGPointMake(-calloutFrame.size.width / 2.0f + centerOffset, arrowFrame.size.height + view.frame.size.height);
+        calloutView.frame = calloutFrame;
+        
+        arrowFrame.origin = CGPointMake(-arrowFrame.size.width / 2.0f + centerOffset, 1.0f + view.frame.size.height);
+        calloutArrowImageView.frame = arrowFrame;
+        calloutArrowImageView.transform = CGAffineTransformMakeRotation(M_PI);
+    }
+    
+    [view addSubview:calloutView];
     [view addSubview:calloutArrowImageView];
     
 }
@@ -148,7 +165,7 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
 
 #pragma mark - Storyboard
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"CODEPushToList"]){
+    if ([segue.identifier isEqualToString:CODEMapViewControllerPushToListSegueIdentifier]){
         CODEListViewController *controller = segue.destinationViewController;
         controller.delegate = self;
     }
