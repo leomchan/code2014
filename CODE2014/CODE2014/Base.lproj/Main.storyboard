@@ -71,6 +71,7 @@
                     <connections>
                         <outlet property="mapView" destination="eo0-jm-jS3" id="JQS-b1-oxf"/>
                         <segue destination="NOY-Uq-MiF" kind="push" identifier="CODEPushToInfo" id="LG3-0E-3DX"/>
+                        <segue destination="Rrw-0I-Ey8" kind="push" id="8gV-Zb-yZN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Pm-Eo-E3g" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -128,7 +129,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BeT-JY-vdx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="919" y="551"/>
+            <point key="canvasLocation" x="1103" y="-627"/>
+        </scene>
+        <!--Charity Information View Controller-->
+        <scene sceneID="5xG-dJ-KMz">
+            <objects>
+                <viewController storyboardIdentifier="CODECharityInformationViewController" id="Rrw-0I-Ey8" customClass="CODECharityInformationViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="v36-Lk-7oK"/>
+                        <viewControllerLayoutGuide type="bottom" id="ETt-wZ-Axc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UNd-NL-4gy">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Z67-L8-0hM"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mi5-JH-XDF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1148" y="134"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4ah-bJ-g7q">
