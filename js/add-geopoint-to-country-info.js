@@ -18,7 +18,7 @@ csv()
 		if (remainingRows.length > 0) {
 			var row = remainingRows[0];
 			var countryQuery = new Parse.Query('CountryInfo');
-			countryQuery.equalTo("country", row[0]);
+			countryQuery.equalTo("countryCode", row[0]);
 			return countryQuery.first()
 			.then(function (info) {
 				if (info) {
@@ -40,4 +40,6 @@ csv()
 			return Parse.Promise.as(true);
 		}
 	}
+
+	addGeoPointToCountryInfo(rows.slice(1));
 });
