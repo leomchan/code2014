@@ -108,7 +108,7 @@ Here’s how it works:
                                 <segue destination="1cW-yS-RyX" kind="push" id="osT-Us-cFx"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="search" id="NNu-Hh-hmO">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="NNu-Hh-hmO">
                             <connections>
                                 <segue destination="vXZ-lx-hvc" kind="push" identifier="CODEPushToList" id="bTR-YN-Qaq"/>
                             </connections>
