@@ -40,8 +40,6 @@
         
         [[CODEDataManager manager] getCharitiesByBusinessNumber:[set allObjects] withBlock:^(NSArray *items, NSError *error) {
             self.arrayOfBusinesses = items;
-           // CODEDebugLog(@"%@", items);
-           // CODEDebugLog(@"%lu", (unsigned long)[self.arrayOfBusinesses count]);
             [self.mainTableView reloadData];
         }];
         
