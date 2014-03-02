@@ -9,11 +9,13 @@
 #import "CODEMapViewController.h"
 #import "CODEDataManager.h"
 #import "CODECalloutView.h"
+#import "CODECharityInformationViewController.h"
 #import "TTTOrdinalNumberFormatter.h"
 
 NSString * const CODEMapViewControllerCountryAnnotationIdentifier = @"country";
 NSString * const CODEMapViewControllerPushToInfoSegueIdentifier = @"CODEPushToInfo";
 NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToList";
+NSString * const CODEMapViewControllerPushToCharitySegueIdentifier = @"CODEPushToCharities";
 
 /******************************************************************************/
 /******************************************************************************/
@@ -105,6 +107,7 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
             if (geoPoint != nil){
                 CODEAnnotation *annotation = [[CODEAnnotation alloc] init];
                 annotation.coordinate = CLLocationCoordinate2DMake(geoPoint.latitude, geoPoint.longitude);
+
                 annotation.countryInfo = object;
                 NSNumber *totalContributions = object[@"totalContributions"];
                 if (totalContributions) {
@@ -179,7 +182,8 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
-    [self performSegueWithIdentifier:CODEMapViewControllerPushToInfoSegueIdentifier sender:self];
+    self.selectedObject = ((CODEAnnotation *) view.annotation).countryInfo;
+    [self performSegueWithIdentifier:CODEMapViewControllerPushToCharitySegueIdentifier sender:self];
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
@@ -214,6 +218,9 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
     
     PFObject *countryInfo = ((CODEAnnotation *)view.annotation).countryInfo;
     self.selectedObject = countryInfo;
+    
+    calloutView.countryLabel.text = [countryInfo[@"englishName"] uppercaseString];
+    
     NSNumberFormatter *currencyFormatter = [[NSNumberFormatter alloc] init];
     currencyFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
     currencyFormatter.usesGroupingSeparator = YES;
@@ -224,7 +231,7 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
     numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
     numberFormatter.usesGroupingSeparator = YES;
     
-    calloutView.charitiesLabel.text = [numberFormatter stringFromNumber:countryInfo[@"numContributors"]];
+    calloutView.charitiesLabel.text = [numberFormatter stringFromNumber:countryInfo[@"numPrograms"]];
     
     TTTOrdinalNumberFormatter *ordinalFormatter = [[TTTOrdinalNumberFormatter alloc] init];
     [ordinalFormatter setLocale:[NSLocale currentLocale]];
@@ -246,6 +253,10 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
     for (UIView *subview in view.subviews) {
         [subview removeFromSuperview];
     }
+    //TODO: TAKE THIS OUT AFTER THE VIEW IS READY//
+    self.selectedObject = ((CODEAnnotation *) view.annotation).countryInfo;
+    [self performSegueWithIdentifier:CODEMapViewControllerPushToCharitySegueIdentifier sender:self];
+
 }
 
 /******************************************************************************/
@@ -257,6 +268,9 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
     if ([segue.identifier isEqualToString:CODEMapViewControllerPushToListSegueIdentifier]){
         CODEListViewController *controller = segue.destinationViewController;
         controller.delegate = self;
+    }else if ([segue.identifier isEqualToString:CODEMapViewControllerPushToCharitySegueIdentifier]){
+        CODECharityInformationViewController *controller = segue.destinationViewController;
+        controller.selectedCountry = self.selectedObject;
     }
 }
 

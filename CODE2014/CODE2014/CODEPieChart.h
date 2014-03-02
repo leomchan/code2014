@@ -10,4 +10,5 @@
 
 @interface CODEPieChart : UIView
 
+- (id) initWithFrame:(CGRect)frame andDictionary: (NSDictionary *) dictionary;
 @end

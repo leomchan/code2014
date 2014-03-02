@@ -32,12 +32,42 @@ static CODEDataManager *manager = nil;
     return manager;
 }
 
+- (void) getBusinessFinancialNumbers:(PFObject *) selectedBusiness withBlock:(CODEDataRetrievalBlock) block {
+    PFQuery *query = [PFQuery queryWithClassName:@"Fin"];
+    [query setLimit:1000];
+    [query whereKey:@"BN" equalTo:selectedBusiness[@"BN"]];
+    [query orderByAscending:@"englishName"];
+    [query setCachePolicy:kPFCachePolicyNetworkOnly];
+    [query findObjectsInBackgroundWithBlock:block];
+    
+}
+
 - (void) getApplicableCountriesWithBlock:(CODEDataRetrievalBlock) block{
     PFQuery *query = [PFQuery queryWithClassName:@"CountryInfo"];
     [query setLimit:1000];
     [query orderByAscending:@"englishName"];
     [query setCachePolicy:kPFCachePolicyNetworkOnly];
     [self findAllObjectsWithQuery:query withBlock:block];
+}
+
+- (void) getApplicableTransactionsForCountry:(PFObject *) selectedCountry withBlock:(CODEDataRetrievalBlock) block{
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Country"];
+    [query setLimit:1000];
+    [query whereKey:@"Country" equalTo:selectedCountry[@"countryCode"]];
+    [query setCachePolicy:kPFCachePolicyNetworkOnly];
+    [query findObjectsInBackgroundWithBlock:block];
+}
+
+- (void) getCharitiesByBusinessNumber:(NSArray *) arrayOfBNs withBlock:(CODEDataRetrievalBlock) block{
+    PFQuery *query = [PFQuery queryWithClassName:@"Ident"];
+    [query setLimit:1000];
+    [query orderByAscending:@"Account_Name"];
+    [query whereKey:@"BN" containedIn:arrayOfBNs];
+    [query setCachePolicy:kPFCachePolicyNetworkOnly];
+    [query findObjectsInBackgroundWithBlock:block];
+
+    
 }
 
 - (void)findAllObjectsWithQuery:(PFQuery *)query withBlock:(void (^)(NSArray *objects, NSError *error))block

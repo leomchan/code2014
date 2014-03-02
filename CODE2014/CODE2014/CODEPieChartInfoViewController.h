@@ -11,5 +11,6 @@
 @interface CODEPieChartInfoViewController : CODEBaseViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *pieTableView;
+@property (nonatomic, strong) PFObject *selectedOrganization;
 
 @end
