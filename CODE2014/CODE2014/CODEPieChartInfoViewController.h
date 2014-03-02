@@ -13,4 +13,6 @@
 @property (nonatomic, weak) IBOutlet UITableView *pieTableView;
 @property (nonatomic, strong) PFObject *selectedOrganization;
 
+- (IBAction) homeButtonTapped:(id) sender;
+
 @end
