@@ -8,6 +8,8 @@ Parse.Cloud.job("determineTrending", function (request, status) {
 			url: "http://www.google.com/trends/hottrends/atom/hourly"
 		})
 		.then(function (response) {
+			Parse.Cloud.useMasterKey();
+			
 			var text = response.text.toLowerCase();
 			var trends = [];
 			var itemIndex = text.indexOf("<li>");
@@ -52,6 +54,7 @@ Parse.Cloud.job("determineTrending", function (request, status) {
 	.then(function () {
 		status.success();
 	}, function (error) {
-		status.error(error);
+		console.error(error);
+		status.error(JSON.stringify(error));
 	});
 });

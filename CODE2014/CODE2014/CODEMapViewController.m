@@ -17,6 +17,8 @@ NSString * const CODEMapViewControllerPushToInfoSegueIdentifier = @"CODEPushToIn
 NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToList";
 NSString * const CODEMapViewControllerPushToCharitySegueIdentifier = @"CODEPushToCharities";
 
+NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
+
 /******************************************************************************/
 /******************************************************************************/
 /******************************************************************************/
@@ -35,6 +37,11 @@ NSString * const CODEMapViewControllerPushToCharitySegueIdentifier = @"CODEPushT
 @interface CODEAnnotationView : MKAnnotationView
 @property(nonatomic,strong) UIImage *postImage;
 @property(nonatomic,strong) UIColor *pinColor;
+@property(nonatomic,assign) BOOL blink;
+
+- (void)fadeIn;
+- (void)fadeOut;
+
 @end
 
 @implementation CODEAnnotationView
@@ -63,6 +70,51 @@ NSString * const CODEMapViewControllerPushToCharitySegueIdentifier = @"CODEPushT
     
     CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
     CGContextFillEllipseInRect(context, CGRectMake(3.0f, 12.0f, 3.0f, 3.0f));
+}
+
+- (void)setBlink:(BOOL)blink
+{
+    if (_blink != blink) {
+        _blink = blink;
+        
+        self.alpha = 1.0f;
+        if (blink) {
+            [self fadeOut];
+        }
+    }
+}
+
+- (void)fadeOut
+{
+    [UIView animateWithDuration:CODEMapViewControllerFadeDuration
+                          delay:0.0
+                        options:UIViewAnimationOptionAllowUserInteraction
+                     animations:^(void) {
+                         self.alpha = 0.2f;
+                     }
+                     completion:^(BOOL finished) {
+                         if (self.blink) {
+                             [self fadeIn];
+                         }
+                         else {
+                             self.alpha = 1.0f;
+                         }
+                     }];
+}
+
+- (void)fadeIn
+{
+    [UIView animateWithDuration:CODEMapViewControllerFadeDuration
+                          delay:0.0
+                        options:UIViewAnimationOptionAllowUserInteraction
+                     animations:^(void) {
+                         self.alpha = 1.0f;
+                     }
+                     completion:^(BOOL finished) {
+                         if (self.blink) {
+                             [self fadeOut];
+                         }
+                     }];
 }
 
 @end
@@ -180,6 +232,14 @@ NSString * const CODEMapViewControllerPushToCharitySegueIdentifier = @"CODEPushT
                                          saturation:0.8f
                                          brightness:0.95f
                                               alpha:1.0f];
+    
+    if ([customAnnotation.countryInfo[@"trending"] boolValue]) {
+        annotationView.blink = YES;
+    }
+    else {
+        annotationView.blink = NO;
+    }
+    
     [annotationView setNeedsDisplay];
     return annotationView;
 }
