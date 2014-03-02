@@ -39,6 +39,7 @@
 		F8EF275418C2795100598794 /* CODEPieChartInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EF275318C2795100598794 /* CODEPieChartInfoViewController.m */; };
 		F8EF275718C2810500598794 /* CODEPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EF275618C2810500598794 /* CODEPieChart.m */; };
 		F8EF275D18C2A12E00598794 /* CODECharityInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EF275C18C2A12E00598794 /* CODECharityInformationViewController.m */; };
+		F8EF6B2F18C3D0D5002DCE67 /* CODEAboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EF6B2E18C3D0D5002DCE67 /* CODEAboutUsViewController.m */; };
 		F8F11DC518C1ADA400AD6890 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F11DC418C1ADA400AD6890 /* Foundation.framework */; };
 		F8F11DC718C1ADA400AD6890 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F11DC618C1ADA400AD6890 /* CoreGraphics.framework */; };
 		F8F11DC918C1ADA400AD6890 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F11DC818C1ADA400AD6890 /* UIKit.framework */; };
@@ -115,6 +116,8 @@
 		F8EF275618C2810500598794 /* CODEPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CODEPieChart.m; sourceTree = "<group>"; };
 		F8EF275B18C2A12E00598794 /* CODECharityInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CODECharityInformationViewController.h; sourceTree = "<group>"; };
 		F8EF275C18C2A12E00598794 /* CODECharityInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CODECharityInformationViewController.m; sourceTree = "<group>"; };
+		F8EF6B2D18C3D0D5002DCE67 /* CODEAboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CODEAboutUsViewController.h; sourceTree = "<group>"; };
+		F8EF6B2E18C3D0D5002DCE67 /* CODEAboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CODEAboutUsViewController.m; sourceTree = "<group>"; };
 		F8F11DC118C1ADA400AD6890 /* CODE2014.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CODE2014.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F11DC418C1ADA400AD6890 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F8F11DC618C1ADA400AD6890 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -293,6 +296,8 @@
 				F8EF275C18C2A12E00598794 /* CODECharityInformationViewController.m */,
 				F8F11DDC18C1ADA400AD6890 /* Images.xcassets */,
 				F8F11DCB18C1ADA400AD6890 /* Supporting Files */,
+				F8EF6B2D18C3D0D5002DCE67 /* CODEAboutUsViewController.h */,
+				F8EF6B2E18C3D0D5002DCE67 /* CODEAboutUsViewController.m */,
 			);
 			path = CODE2014;
 			sourceTree = "<group>";
@@ -459,6 +464,7 @@
 				F8EF274F18C2534500598794 /* CODEMapViewController.m in Sources */,
 				81EF0BE318C2B79E00B73203 /* TTTURLRequestFormatter.m in Sources */,
 				81EF0BE218C2B79E00B73203 /* TTTUnitOfInformationFormatter.m in Sources */,
+				F8EF6B2F18C3D0D5002DCE67 /* CODEAboutUsViewController.m in Sources */,
 				F8F2679C18C3C43900BD7404 /* MBProgressHUD.m in Sources */,
 				81EF0BDE18C2B79E00B73203 /* TTTColorFormatter.m in Sources */,
 				81EF0B8A18C2942300B73203 /* CODECalloutView.m in Sources */,

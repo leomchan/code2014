@@ -11,6 +11,7 @@
 #import "CODECalloutView.h"
 #import "CODECharityInformationViewController.h"
 #import "TTTOrdinalNumberFormatter.h"
+#import "CODEAboutUsViewController.h"
 
 NSString * const CODEMapViewControllerCountryAnnotationIdentifier = @"country";
 NSString * const CODEMapViewControllerPushToInfoSegueIdentifier = @"CODEPushToInfo";
@@ -204,6 +205,17 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
 
 }
 
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults boolForKey:@"CODE_VIEWED_TUTORIAL"]){
+        [self performSegueWithIdentifier:@"PushToAboutUs" sender:self];
+        [defaults setBool:YES forKey:@"CODE_VIEWED_TUTORIAL"];
+        [defaults synchronize];
+    }
+    
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
