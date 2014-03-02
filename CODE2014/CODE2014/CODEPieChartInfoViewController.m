@@ -375,7 +375,10 @@
     }
     
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:d]];
-   }
+}
 
+- (IBAction) homeButtonTapped:(id) sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 
 @end

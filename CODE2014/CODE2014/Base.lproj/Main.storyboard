@@ -448,7 +448,11 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Charity Details" id="c10-Fa-Ahg">
-                        <barButtonItem key="rightBarButtonItem" title="Home" id="Se0-V0-UOU"/>
+                        <barButtonItem key="rightBarButtonItem" image="homeButton" id="Se0-V0-UOU">
+                            <connections>
+                                <action selector="homeButtonTapped:" destination="NOY-Uq-MiF" id="S9f-iL-MG6"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="pieTableView" destination="LfR-GB-Oci" id="4SS-ai-Bi9"/>
@@ -483,7 +487,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" title="Charities" id="Z67-L8-0hM"/>
+                    <navigationItem key="navigationItem" title="Charities" id="Z67-L8-0hM">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="2QE-74-ktq"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="mainTableView" destination="SuY-85-5PO" id="HLx-h4-JtY"/>
                         <segue destination="NOY-Uq-MiF" kind="push" identifier="CODEPushToCharityDetails" id="FGY-i3-Ecl"/>
@@ -518,6 +524,7 @@
     </scenes>
     <resources>
         <image name="TriangleAccent" width="68" height="20"/>
+        <image name="homeButton" width="29" height="29"/>
         <image name="piePlate" width="240" height="240"/>
         <image name="triangle1" width="19" height="22"/>
         <image name="triangle2" width="19" height="22"/>
