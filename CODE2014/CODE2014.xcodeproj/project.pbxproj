@@ -13,6 +13,8 @@
 		81EF0BC418C29AFE00B73203 /* callout-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81EF0BC018C29AFE00B73203 /* callout-arrow@2x.png */; };
 		81EF0BC518C29AFE00B73203 /* callout.png in Resources */ = {isa = PBXBuildFile; fileRef = 81EF0BC118C29AFE00B73203 /* callout.png */; };
 		81EF0BC618C29AFE00B73203 /* callout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81EF0BC218C29AFE00B73203 /* callout@2x.png */; };
+		81EF0BC918C2A76C00B73203 /* callout-arrow-top.png in Resources */ = {isa = PBXBuildFile; fileRef = 81EF0BC718C2A76C00B73203 /* callout-arrow-top.png */; };
+		81EF0BCA18C2A76C00B73203 /* callout-arrow-top@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 81EF0BC818C2A76C00B73203 /* callout-arrow-top@2x.png */; };
 		F8EF273718C23D0100598794 /* CODEBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EF273618C23D0100598794 /* CODEBaseViewController.m */; };
 		F8EF273C18C23DDE00598794 /* CODEDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F8EF273B18C23DDE00598794 /* CODEDataManager.m */; };
 		F8EF273E18C2453000598794 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8EF273D18C2453000598794 /* AVFoundation.framework */; };
@@ -62,6 +64,8 @@
 		81EF0BC018C29AFE00B73203 /* callout-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "callout-arrow@2x.png"; sourceTree = "<group>"; };
 		81EF0BC118C29AFE00B73203 /* callout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = callout.png; sourceTree = "<group>"; };
 		81EF0BC218C29AFE00B73203 /* callout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "callout@2x.png"; sourceTree = "<group>"; };
+		81EF0BC718C2A76C00B73203 /* callout-arrow-top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "callout-arrow-top.png"; sourceTree = "<group>"; };
+		81EF0BC818C2A76C00B73203 /* callout-arrow-top@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "callout-arrow-top@2x.png"; sourceTree = "<group>"; };
 		F8EF273518C23D0100598794 /* CODEBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CODEBaseViewController.h; sourceTree = "<group>"; };
 		F8EF273618C23D0100598794 /* CODEBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CODEBaseViewController.m; sourceTree = "<group>"; };
 		F8EF273A18C23DDE00598794 /* CODEDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CODEDataManager.h; sourceTree = "<group>"; };
@@ -141,6 +145,8 @@
 		81EF0BBE18C29AFE00B73203 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				81EF0BC718C2A76C00B73203 /* callout-arrow-top.png */,
+				81EF0BC818C2A76C00B73203 /* callout-arrow-top@2x.png */,
 				81EF0BBF18C29AFE00B73203 /* callout-arrow.png */,
 				81EF0BC018C29AFE00B73203 /* callout-arrow@2x.png */,
 				81EF0BC118C29AFE00B73203 /* callout.png */,
@@ -350,6 +356,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81EF0BC318C29AFE00B73203 /* callout-arrow.png in Resources */,
+				81EF0BC918C2A76C00B73203 /* callout-arrow-top.png in Resources */,
 				81EF0B8C18C2947700B73203 /* CODECalloutView.xib in Resources */,
 				81EF0BC518C29AFE00B73203 /* callout.png in Resources */,
 				F8F11DDD18C1ADA400AD6890 /* Images.xcassets in Resources */,
@@ -357,6 +364,7 @@
 				F8F11DD818C1ADA400AD6890 /* Main.storyboard in Resources */,
 				81EF0BC418C29AFE00B73203 /* callout-arrow@2x.png in Resources */,
 				81EF0BC618C29AFE00B73203 /* callout@2x.png in Resources */,
+				81EF0BCA18C2A76C00B73203 /* callout-arrow-top@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
