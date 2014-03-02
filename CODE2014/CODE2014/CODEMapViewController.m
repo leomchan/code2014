@@ -9,6 +9,7 @@
 #import "CODEMapViewController.h"
 #import "CODEDataManager.h"
 #import "CODECalloutView.h"
+#import "TTTOrdinalNumberFormatter.h"
 
 NSString * const CODEMapViewControllerCountryAnnotationIdentifier = @"country";
 NSString * const CODEMapViewControllerPushToInfoSegueIdentifier = @"CODEPushToInfo";
@@ -160,6 +161,12 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
     numberFormatter.usesGroupingSeparator = YES;
     
     calloutView.charitiesLabel.text = [numberFormatter stringFromNumber:countryInfo[@"numContributors"]];
+    
+    TTTOrdinalNumberFormatter *ordinalFormatter = [[TTTOrdinalNumberFormatter alloc] init];
+    [ordinalFormatter setLocale:[NSLocale currentLocale]];
+    [ordinalFormatter setGrammaticalGender:TTTOrdinalNumberFormatterMaleGender];
+    
+    calloutView.rankLabel.text = [ordinalFormatter stringFromNumber:[NSNumber numberWithInt:5]];
     
     [view addSubview:calloutView];
     [view addSubview:calloutArrowImageView];
