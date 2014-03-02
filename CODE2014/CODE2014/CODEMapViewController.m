@@ -130,6 +130,8 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
 @property (nonatomic,strong) NSArray *calloutViews;
 
 - (void)infoTapped:(id)sender;
+- (void)dismissCallout;
+
 @end
 
 @implementation CODEMapViewController
@@ -183,7 +185,7 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
 
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-   
+
     if (self.selectedObject != nil){
         
         PFGeoPoint *geoPoint = self.selectedObject[@"location"];
@@ -193,7 +195,7 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
       
         [self.mapView setCenterCoordinate:track];
     }
-    
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -312,11 +314,12 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
 
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view
 {
-    for (UIView *subview in self.calloutViews) {
-        [subview removeFromSuperview];
-    }
-    
-    self.calloutViews = nil;
+    [self dismissCallout];
+}
+
+- (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
+{
+    [self dismissCallout];
 }
 
 /******************************************************************************/
@@ -328,9 +331,13 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
     if ([segue.identifier isEqualToString:CODEMapViewControllerPushToListSegueIdentifier]){
         CODEListViewController *controller = segue.destinationViewController;
         controller.delegate = self;
+        self.selectedObject = nil;
+        [self dismissCallout];
     }else if ([segue.identifier isEqualToString:CODEMapViewControllerPushToCharitySegueIdentifier]){
         CODECharityInformationViewController *controller = segue.destinationViewController;
         controller.selectedCountry = self.selectedObject;
+        self.selectedObject = nil;
+        [self dismissCallout];
     }
 }
 
@@ -357,6 +364,21 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
     if (self.selectedObject) {
         [self performSegueWithIdentifier:CODEMapViewControllerPushToCharitySegueIdentifier sender:self];
     }
+}
+
+/******************************************************************************/
+/******************************************************************************/
+/******************************************************************************/
+
+#pragma mark - Methods
+
+- (void)dismissCallout
+{
+    for (UIView *subview in self.calloutViews) {
+        [subview removeFromSuperview];
+    }
+    
+    self.calloutViews = nil;
 }
 
 @end
