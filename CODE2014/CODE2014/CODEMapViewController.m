@@ -127,6 +127,7 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
 @property (nonatomic, strong) NSMutableArray *arrayOfCountries;
 @property (nonatomic,assign) double maxContributions;
 @property (nonatomic,strong) NSArray *calloutViews;
+@property (nonatomic,assign) BOOL changeRegionFromViewWillAppear;
 
 - (void)infoTapped:(id)sender;
 - (void)dismissCallout;
@@ -177,10 +178,8 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
         
         [self.mapView addAnnotations:annotationsToAdd];
     }];
-    
-    
-    
-	// Do any additional setup after loading the view.
+
+    self.changeRegionFromViewWillAppear = NO;
 }
 
 - (void) viewWillAppear:(BOOL)animated{
@@ -199,6 +198,7 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
         span.longitudeDelta = 5;
         region.span = span;
         region.center = track;
+        self.changeRegionFromViewWillAppear = YES;
         [self.mapView setRegion:region];
     }
 
@@ -267,12 +267,18 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
 
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
 {
-    [self dismissCallout];
+    if (!self.changeRegionFromViewWillAppear) {
+        [self dismissCallout];
+        self.selectedObject = nil;
+    }
 }
 
-- (void)mapViewDidFinishRenderingMap:(MKMapView *)mapView fullyRendered:(BOOL)fullyRendered
+-(void)mapViewDidFinishRenderingMap:(MKMapView *)mapView fullyRendered:(BOOL)fullyRendered
 {
-    [self showCallout];
+    if (self.changeRegionFromViewWillAppear) {
+        [self showCallout];
+        self.changeRegionFromViewWillAppear = NO;
+    }
 }
 
 /******************************************************************************/
