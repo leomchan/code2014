@@ -41,7 +41,6 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
 
 - (void)fadeIn;
 - (void)fadeOut;
-
 @end
 
 @implementation CODEAnnotationView
@@ -131,6 +130,7 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
 
 - (void)infoTapped:(id)sender;
 - (void)dismissCallout;
+- (void)showCallout;
 
 @end
 
@@ -192,6 +192,7 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
         CLLocationCoordinate2D track;
         track.latitude = geoPoint.latitude;
         track.longitude = geoPoint.longitude;
+      
         MKCoordinateRegion region;
         MKCoordinateSpan span;
         span.latitudeDelta = 5;
@@ -220,7 +221,7 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
     CODEAnnotationView *annotationView = (CODEAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:CODEMapViewControllerCountryAnnotationIdentifier];
     if (!annotationView) {
         annotationView = [[CODEAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:CODEMapViewControllerCountryAnnotationIdentifier];
-        annotationView.backgroundColor = [UIColor blueColor];
+       // annotationView.backgroundColor = [UIColor blueColor];
     }
     else {
         annotationView.annotation = annotation;
@@ -243,6 +244,7 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
     }
     
     [annotationView setNeedsDisplay];
+    
     return annotationView;
 }
 
@@ -254,18 +256,119 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
+
+    PFObject *countryInfo = ((CODEAnnotation *)view.annotation).countryInfo;
+    self.selectedObject = countryInfo;
+    [self showCallout];
+}
+
+- (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view
+{
+    [self dismissCallout];
+}
+
+- (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
+{
+    [self dismissCallout];
+}
+
+- (void)mapViewDidFinishRenderingMap:(MKMapView *)mapView fullyRendered:(BOOL)fullyRendered
+{
+    [self showCallout];
+}
+
+/******************************************************************************/
+/******************************************************************************/
+/******************************************************************************/
+
+#pragma mark - Storyboard
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:CODEMapViewControllerPushToListSegueIdentifier]){
+        CODEListViewController *controller = segue.destinationViewController;
+        controller.delegate = self;
+        self.selectedObject = nil;
+        [self dismissCallout];
+    }else if ([segue.identifier isEqualToString:CODEMapViewControllerPushToCharitySegueIdentifier]){
+        CODECharityInformationViewController *controller = segue.destinationViewController;
+        controller.selectedCountry = self.selectedObject;
+        self.selectedObject = nil;
+        [self dismissCallout];
+    }
+}
+
+/******************************************************************************/
+/******************************************************************************/
+/******************************************************************************/
+
+#pragma mark - CODEListViewControllerDelegate
+
+- (void)listViewController:(CODEListViewController *)controller didSelectCountryInfo:(PFObject *)countryInfo
+{
+    self.selectedObject = countryInfo;
+}
+
+/******************************************************************************/
+/******************************************************************************/
+/******************************************************************************/
+
+#pragma mark - Actions
+
+- (void)infoTapped:(id)sender
+{
+    //CODEDebugLog(@"hello?");
+    if (self.selectedObject) {
+        [self performSegueWithIdentifier:CODEMapViewControllerPushToCharitySegueIdentifier sender:self];
+    }
+}
+
+/******************************************************************************/
+/******************************************************************************/
+/******************************************************************************/
+
+#pragma mark - Methods
+
+- (void)dismissCallout
+{
+    for (UIView *subview in self.calloutViews) {
+        [subview removeFromSuperview];
+    }
     
-    CODEDebugLog(@"HALLO?");
+    self.calloutViews = nil;
+}
+
+- (void)showCallout
+{
+    [self dismissCallout];
+    
+    CODEAnnotationView *view = nil;
+    
+    NSMutableArray *subviews = [NSMutableArray arrayWithArray:self.mapView.subviews];
+    
+    while (subviews.count > 0) {
+        CODEAnnotationView *subview = [subviews lastObject];
+        [subviews removeLastObject];
+        [subviews addObjectsFromArray:subview.subviews];
+        
+        if ([subview isMemberOfClass:[CODEAnnotationView class]]) {
+            CODEAnnotation *annotation = (CODEAnnotation *)subview.annotation;
+            if ([annotation.countryInfo[@"countryCode"] isEqualToString:self.selectedObject[@"countryCode"]]) {
+                view = subview;
+                break;
+            }
+        }
+    }
+    
+    if (!view) return;
     
     const CGFloat centerOffset = 8.0f;
     const CGFloat spacingFromEdge = 8.0f;
-
+    
     CODECalloutView *calloutView = [[[NSBundle mainBundle] loadNibNamed:@"CODECalloutView" owner:self options:nil] objectAtIndex:0];
     UIImageView *calloutArrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"callout-arrow.png"]];
     
     CGRect arrowFrame = calloutArrowImageView.frame;
     CGRect calloutFrame = calloutView.frame;
-
+    
     CGSize calloutSize = CGSizeMake(calloutFrame.size.width, calloutFrame.size.height + arrowFrame.size.height);
     
     // Does it fit above?
@@ -320,74 +423,4 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
     
     self.calloutViews = @[calloutView, calloutArrowImageView];
 }
-
-- (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view
-{
-    [self dismissCallout];
-}
-
-- (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
-{
-    [self dismissCallout];
-}
-
-/******************************************************************************/
-/******************************************************************************/
-/******************************************************************************/
-
-#pragma mark - Storyboard
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:CODEMapViewControllerPushToListSegueIdentifier]){
-        CODEListViewController *controller = segue.destinationViewController;
-        controller.delegate = self;
-        self.selectedObject = nil;
-        [self dismissCallout];
-    }else if ([segue.identifier isEqualToString:CODEMapViewControllerPushToCharitySegueIdentifier]){
-        CODECharityInformationViewController *controller = segue.destinationViewController;
-        controller.selectedCountry = self.selectedObject;
-        self.selectedObject = nil;
-        [self dismissCallout];
-    }
-}
-
-/******************************************************************************/
-/******************************************************************************/
-/******************************************************************************/
-
-#pragma mark - CODEListViewControllerDelegate
-
-- (void)listViewController:(CODEListViewController *)controller didSelectCountryInfo:(PFObject *)countryInfo
-{
-    self.selectedObject = countryInfo;
-}
-
-/******************************************************************************/
-/******************************************************************************/
-/******************************************************************************/
-
-#pragma mark - Actions
-
-- (void)infoTapped:(id)sender
-{
-    CODEDebugLog(@"hello?");
-    if (self.selectedObject) {
-        [self performSegueWithIdentifier:CODEMapViewControllerPushToCharitySegueIdentifier sender:self];
-    }
-}
-
-/******************************************************************************/
-/******************************************************************************/
-/******************************************************************************/
-
-#pragma mark - Methods
-
-- (void)dismissCallout
-{
-    for (UIView *subview in self.calloutViews) {
-        [subview removeFromSuperview];
-    }
-    
-    self.calloutViews = nil;
-}
-
 @end
