@@ -1,0 +1,11 @@
+{
+    "applications": {
+        "_default": {
+            "link": "code2014"
+        }, 
+        "code2014": {
+            "applicationId": "pkbkdUru3c58aGvO3PO7E3yhvqdt4qylAQZ3qsHE", 
+            "masterKey": "Zkmr3j79g3THTAnvSWT5gWSy1fhSqIatrkou900W"
+        }
+    }
+}
