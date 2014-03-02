@@ -185,7 +185,7 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
 
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-   /*
+
     if (self.selectedObject != nil){
         
         PFGeoPoint *geoPoint = self.selectedObject[@"location"];
@@ -201,7 +201,6 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
         region.center = track;
         [self.mapView setRegion:region];
     }
-    */
 }
 
 - (void)didReceiveMemoryWarning
@@ -337,9 +336,13 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
     if ([segue.identifier isEqualToString:CODEMapViewControllerPushToListSegueIdentifier]){
         CODEListViewController *controller = segue.destinationViewController;
         controller.delegate = self;
+        self.selectedObject = nil;
+        [self dismissCallout];
     }else if ([segue.identifier isEqualToString:CODEMapViewControllerPushToCharitySegueIdentifier]){
         CODECharityInformationViewController *controller = segue.destinationViewController;
         controller.selectedCountry = self.selectedObject;
+        self.selectedObject = nil;
+        [self dismissCallout];
     }
 }
 
