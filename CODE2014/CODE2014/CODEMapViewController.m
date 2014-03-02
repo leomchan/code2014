@@ -193,9 +193,13 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
         track.latitude = geoPoint.latitude;
         track.longitude = geoPoint.longitude;
       
-        [self.mapView setCenterCoordinate:track];
-        
-        [self showCallout];
+        MKCoordinateRegion region;
+        MKCoordinateSpan span;
+        span.latitudeDelta = 5;
+        span.longitudeDelta = 5;
+        region.span = span;
+        region.center = track;
+        [self.mapView setRegion:region];
     }
 
 }
@@ -239,6 +243,7 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
     }
     
     [annotationView setNeedsDisplay];
+    
     return annotationView;
 }
 
@@ -263,6 +268,11 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
 - (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
 {
     [self dismissCallout];
+}
+
+- (void)mapViewDidFinishRenderingMap:(MKMapView *)mapView fullyRendered:(BOOL)fullyRendered
+{
+    [self showCallout];
 }
 
 /******************************************************************************/
@@ -326,6 +336,8 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
 
 - (void)showCallout
 {
+    [self dismissCallout];
+    
     CODEAnnotationView *view = nil;
     
     NSMutableArray *subviews = [NSMutableArray arrayWithArray:self.mapView.subviews];

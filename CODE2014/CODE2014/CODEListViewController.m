@@ -10,6 +10,7 @@
 #import "CODEDataManager.h"
 #import <CoreLocation/CoreLocation.h>
 #import <AddressBook/AddressBook.h>
+#import "MBProgressHUD.h"
 
 @interface CODEListViewController ()
 @property (nonatomic, strong) NSMutableArray *arrayOfCountries;
@@ -22,6 +23,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     self.arrayOfCountries  = [NSMutableArray array];
     [[CODEDataManager manager] getApplicableCountriesWithBlock:^(NSArray *items, NSError *error) {
         
@@ -31,6 +34,7 @@
                 [self.arrayOfCountries addObject:object];
             }
         }
+        [hud hide:YES];
         [self.mainTableView reloadData];
        // self.arrayOfCountries = [[set allObjects] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     }];

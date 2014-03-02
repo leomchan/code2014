@@ -11,6 +11,8 @@
 #import "CODEPieChartInfoViewController.h"
 #import "CODEPieChartInfoViewController.h"
 
+#import "MBProgressHUD.h"
+
 @interface CODECharityInformationViewController ()
 @property (nonatomic, strong) NSArray *arrayOfBusinesses;
 @property (nonatomic, strong) PFObject *selectedBusiness;
@@ -32,6 +34,8 @@
     [super viewDidLoad];
     self.arrayOfBusinesses = [NSArray array];
     
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
     [[CODEDataManager manager] getApplicableTransactionsForCountry:self.selectedCountry withBlock:^(NSArray *items, NSError *error) {
         NSMutableSet *set = [NSMutableSet set];
         for (PFObject *object in items){
@@ -41,6 +45,7 @@
         [[CODEDataManager manager] getCharitiesByBusinessNumber:[set allObjects] withBlock:^(NSArray *items, NSError *error) {
             self.arrayOfBusinesses = items;
             [self.mainTableView reloadData];
+            [hud hide:YES];
         }];
         
     }];
