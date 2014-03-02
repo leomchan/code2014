@@ -118,23 +118,23 @@
 		F8EF275C18C2A12E00598794 /* CODECharityInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CODECharityInformationViewController.m; sourceTree = "<group>"; };
 		F8EF6B2D18C3D0D5002DCE67 /* CODEAboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CODEAboutUsViewController.h; sourceTree = "<group>"; };
 		F8EF6B2E18C3D0D5002DCE67 /* CODEAboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CODEAboutUsViewController.m; sourceTree = "<group>"; };
-		F8F11DC118C1ADA400AD6890 /* CODE2014.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CODE2014.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8F11DC118C1ADA400AD6890 /* CharityPie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CharityPie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F11DC418C1ADA400AD6890 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F8F11DC618C1ADA400AD6890 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		F8F11DC818C1ADA400AD6890 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		F8F11DCC18C1ADA400AD6890 /* CODE2014-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CODE2014-Info.plist"; sourceTree = "<group>"; };
+		F8F11DCC18C1ADA400AD6890 /* CharityPie-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CharityPie-Info.plist"; sourceTree = "<group>"; };
 		F8F11DCE18C1ADA400AD6890 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F8F11DD018C1ADA400AD6890 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		F8F11DD218C1ADA400AD6890 /* CODE2014-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CODE2014-Prefix.pch"; sourceTree = "<group>"; };
+		F8F11DD218C1ADA400AD6890 /* CharityPie-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CharityPie-Prefix.pch"; sourceTree = "<group>"; };
 		F8F11DD318C1ADA400AD6890 /* CODEAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CODEAppDelegate.h; sourceTree = "<group>"; };
 		F8F11DD418C1ADA400AD6890 /* CODEAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CODEAppDelegate.m; sourceTree = "<group>"; };
 		F8F11DD718C1ADA400AD6890 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F8F11DD918C1ADA400AD6890 /* CODEListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CODEListViewController.h; sourceTree = "<group>"; };
 		F8F11DDA18C1ADA400AD6890 /* CODEListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CODEListViewController.m; sourceTree = "<group>"; };
 		F8F11DDC18C1ADA400AD6890 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		F8F11DE218C1ADA500AD6890 /* CODE2014Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CODE2014Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8F11DE218C1ADA500AD6890 /* CharityPieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CharityPieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8F11DE318C1ADA500AD6890 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		F8F11DEB18C1ADA500AD6890 /* CODE2014Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CODE2014Tests-Info.plist"; sourceTree = "<group>"; };
+		F8F11DEB18C1ADA500AD6890 /* CharityPieTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CharityPieTests-Info.plist"; sourceTree = "<group>"; };
 		F8F11DED18C1ADA500AD6890 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F8F11DEF18C1ADA500AD6890 /* CODE2014Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CODE2014Tests.m; sourceTree = "<group>"; };
 		F8F11DF918C1AE2200AD6890 /* CODE2014-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CODE2014-Prefix.pch"; sourceTree = "<group>"; };
@@ -248,8 +248,8 @@
 		F8F11DC218C1ADA400AD6890 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F8F11DC118C1ADA400AD6890 /* CODE2014.app */,
-				F8F11DE218C1ADA500AD6890 /* CODE2014Tests.xctest */,
+				F8F11DC118C1ADA400AD6890 /* CharityPie.app */,
+				F8F11DE218C1ADA500AD6890 /* CharityPieTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -305,10 +305,10 @@
 		F8F11DCB18C1ADA400AD6890 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				F8F11DCC18C1ADA400AD6890 /* CODE2014-Info.plist */,
+				F8F11DCC18C1ADA400AD6890 /* CharityPie-Info.plist */,
 				F8F11DCD18C1ADA400AD6890 /* InfoPlist.strings */,
 				F8F11DD018C1ADA400AD6890 /* main.m */,
-				F8F11DD218C1ADA400AD6890 /* CODE2014-Prefix.pch */,
+				F8F11DD218C1ADA400AD6890 /* CharityPie-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -326,7 +326,7 @@
 			isa = PBXGroup;
 			children = (
 				F8F11DF918C1AE2200AD6890 /* CODE2014-Prefix.pch */,
-				F8F11DEB18C1ADA500AD6890 /* CODE2014Tests-Info.plist */,
+				F8F11DEB18C1ADA500AD6890 /* CharityPieTests-Info.plist */,
 				F8F11DEC18C1ADA500AD6890 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -353,9 +353,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F8F11DC018C1ADA400AD6890 /* CODE2014 */ = {
+		F8F11DC018C1ADA400AD6890 /* CharityPie */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F8F11DF318C1ADA500AD6890 /* Build configuration list for PBXNativeTarget "CODE2014" */;
+			buildConfigurationList = F8F11DF318C1ADA500AD6890 /* Build configuration list for PBXNativeTarget "CharityPie" */;
 			buildPhases = (
 				F8F11DBD18C1ADA400AD6890 /* Sources */,
 				F8F11DBE18C1ADA400AD6890 /* Frameworks */,
@@ -365,14 +365,14 @@
 			);
 			dependencies = (
 			);
-			name = CODE2014;
+			name = CharityPie;
 			productName = CODE2014;
-			productReference = F8F11DC118C1ADA400AD6890 /* CODE2014.app */;
+			productReference = F8F11DC118C1ADA400AD6890 /* CharityPie.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F8F11DE118C1ADA500AD6890 /* CODE2014Tests */ = {
+		F8F11DE118C1ADA500AD6890 /* CharityPieTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F8F11DF618C1ADA500AD6890 /* Build configuration list for PBXNativeTarget "CODE2014Tests" */;
+			buildConfigurationList = F8F11DF618C1ADA500AD6890 /* Build configuration list for PBXNativeTarget "CharityPieTests" */;
 			buildPhases = (
 				F8F11DDE18C1ADA500AD6890 /* Sources */,
 				F8F11DDF18C1ADA500AD6890 /* Frameworks */,
@@ -383,9 +383,9 @@
 			dependencies = (
 				F8F11DE818C1ADA500AD6890 /* PBXTargetDependency */,
 			);
-			name = CODE2014Tests;
+			name = CharityPieTests;
 			productName = CODE2014Tests;
-			productReference = F8F11DE218C1ADA500AD6890 /* CODE2014Tests.xctest */;
+			productReference = F8F11DE218C1ADA500AD6890 /* CharityPieTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -403,7 +403,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F8F11DBC18C1ADA400AD6890 /* Build configuration list for PBXProject "CODE2014" */;
+			buildConfigurationList = F8F11DBC18C1ADA400AD6890 /* Build configuration list for PBXProject "CharityPie" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -416,8 +416,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F8F11DC018C1ADA400AD6890 /* CODE2014 */,
-				F8F11DE118C1ADA500AD6890 /* CODE2014Tests */,
+				F8F11DC018C1ADA400AD6890 /* CharityPie */,
+				F8F11DE118C1ADA500AD6890 /* CharityPieTests */,
 			);
 		};
 /* End PBXProject section */
@@ -493,7 +493,7 @@
 /* Begin PBXTargetDependency section */
 		F8F11DE818C1ADA500AD6890 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F8F11DC018C1ADA400AD6890 /* CODE2014 */;
+			target = F8F11DC018C1ADA400AD6890 /* CharityPie */;
 			targetProxy = F8F11DE718C1ADA500AD6890 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -612,9 +612,9 @@
 					"$(SRCROOT)/External",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CODE2014/CODE2014-Prefix.pch";
-				INFOPLIST_FILE = "CODE2014/CODE2014-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "CODE2014/CharityPie-Prefix.pch";
+				INFOPLIST_FILE = "CODE2014/CharityPie-Info.plist";
+				PRODUCT_NAME = CharityPie;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -629,9 +629,9 @@
 					"$(SRCROOT)/External",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CODE2014/CODE2014-Prefix.pch";
-				INFOPLIST_FILE = "CODE2014/CODE2014-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "CODE2014/CharityPie-Prefix.pch";
+				INFOPLIST_FILE = "CODE2014/CharityPie-Info.plist";
+				PRODUCT_NAME = CharityPie;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -652,8 +652,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "CODE2014Tests/CODE2014Tests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "CODE2014Tests/CharityPieTests-Info.plist";
+				PRODUCT_NAME = CharityPieTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -671,8 +671,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CODE2014/CODE2014-Prefix.pch";
-				INFOPLIST_FILE = "CODE2014Tests/CODE2014Tests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "CODE2014Tests/CharityPieTests-Info.plist";
+				PRODUCT_NAME = CharityPieTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -681,7 +681,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F8F11DBC18C1ADA400AD6890 /* Build configuration list for PBXProject "CODE2014" */ = {
+		F8F11DBC18C1ADA400AD6890 /* Build configuration list for PBXProject "CharityPie" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F8F11DF118C1ADA500AD6890 /* Debug */,
@@ -690,7 +690,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F8F11DF318C1ADA500AD6890 /* Build configuration list for PBXNativeTarget "CODE2014" */ = {
+		F8F11DF318C1ADA500AD6890 /* Build configuration list for PBXNativeTarget "CharityPie" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F8F11DF418C1ADA500AD6890 /* Debug */,
@@ -699,7 +699,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F8F11DF618C1ADA500AD6890 /* Build configuration list for PBXNativeTarget "CODE2014Tests" */ = {
+		F8F11DF618C1ADA500AD6890 /* Build configuration list for PBXNativeTarget "CharityPieTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F8F11DF718C1ADA500AD6890 /* Debug */,
