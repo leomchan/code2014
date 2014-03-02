@@ -13,5 +13,6 @@
 @property(nonatomic,weak) IBOutlet UILabel *donationAmountLabel;
 @property(nonatomic,weak) IBOutlet UILabel *charitiesLabel;
 @property(nonatomic,weak) IBOutlet UILabel *rankLabel;
+@property(nonatomic,weak) IBOutlet UIButton *infoButton;
 
 @end

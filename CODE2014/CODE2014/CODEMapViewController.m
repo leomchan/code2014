@@ -15,9 +15,11 @@ NSString * const CODEMapViewControllerCountryAnnotationIdentifier = @"country";
 NSString * const CODEMapViewControllerPushToInfoSegueIdentifier = @"CODEPushToInfo";
 NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToList";
 
-@interface CODEMapViewController ()
-@property (nonatomic, strong) NSMutableArray *arrayOfCountries;
-@end
+/******************************************************************************/
+/******************************************************************************/
+/******************************************************************************/
+
+#pragma mark - Annotation
 
 @interface CODEAnnotation : NSObject <MKAnnotation>
 @property (nonatomic)CLLocationCoordinate2D coordinate;
@@ -26,6 +28,17 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
 @end
 
 @implementation CODEAnnotation
+@end
+
+/******************************************************************************/
+/******************************************************************************/
+/******************************************************************************/
+
+#pragma mark - Map View Controller
+
+@interface CODEMapViewController ()
+@property (nonatomic, strong) NSMutableArray *arrayOfCountries;
+- (void)infoTapped:(id)sender;
 @end
 
 @implementation CODEMapViewController
@@ -86,9 +99,9 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
         region.span = span;
         region.center = track;
         [self.mapView setRegion:region];
-        
     }
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -123,7 +136,7 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
 {
     const CGFloat centerOffset = 8.0f;
     const CGFloat spacingFromEdge = 8.0f;
-    
+
     CODECalloutView *calloutView = [[[NSBundle mainBundle] loadNibNamed:@"CODECalloutView" owner:self options:nil] objectAtIndex:0];
     UIImageView *calloutArrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"callout-arrow.png"]];
     
@@ -150,6 +163,7 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
     }
     
     PFObject *countryInfo = ((CODEAnnotation *)view.annotation).countryInfo;
+    self.selectedObject = countryInfo;
     NSNumberFormatter *currencyFormatter = [[NSNumberFormatter alloc] init];
     currencyFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
     currencyFormatter.usesGroupingSeparator = YES;
@@ -167,6 +181,10 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
     [ordinalFormatter setGrammaticalGender:TTTOrdinalNumberFormatterMaleGender];
     
     calloutView.rankLabel.text = [ordinalFormatter stringFromNumber:[NSNumber numberWithInt:5]];
+    
+    [calloutView.infoButton addTarget:self
+                               action:@selector(infoTapped:)
+                     forControlEvents:UIControlEventTouchUpInside];
     
     [view addSubview:calloutView];
     [view addSubview:calloutArrowImageView];
@@ -201,6 +219,20 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
 - (void)listViewController:(CODEListViewController *)controller didSelectCountryInfo:(PFObject *)countryInfo
 {
     self.selectedObject = countryInfo;
+}
+
+/******************************************************************************/
+/******************************************************************************/
+/******************************************************************************/
+
+#pragma mark - Actions
+
+- (void)infoTapped:(id)sender
+{
+    if (self.selectedObject) {
+        [self performSegueWithIdentifier:CODEMapViewControllerPushToInfoSegueIdentifier
+                                  sender:sender];
+    }
 }
 
 @end
