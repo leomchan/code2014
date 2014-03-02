@@ -172,8 +172,19 @@
                                             <outlet property="orgNameLabel" destination="bNA-EO-ojr" id="wR9-wT-Uud"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="rTX-Do-22J">
+                                        <rect key="frame" x="0.0" y="606" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rTX-Do-22J" id="uNY-wa-yEX">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" red="0.89411764709999997" green="0.8980392157" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="tintColor" red="0.89411764709999997" green="0.8980392157" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                        </tableViewCellContentView>
+                                        <color key="tintColor" red="0.89411764709999997" green="0.8980392157" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CODECharityDonationCell" rowHeight="150" id="Ta3-b7-p5n" customClass="CODECharityDonationCell">
-                                        <rect key="frame" x="0.0" y="606" width="320" height="150"/>
+                                        <rect key="frame" x="0.0" y="650" width="320" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ta3-b7-p5n" id="54S-PV-smC">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
@@ -215,7 +226,7 @@
                                         <color key="backgroundColor" red="0.89411764709999997" green="0.8980392157" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CODECharityCostCells" rowHeight="179" id="dsR-DL-fqP" customClass="CODECharityCostCells">
-                                        <rect key="frame" x="0.0" y="756" width="320" height="179"/>
+                                        <rect key="frame" x="0.0" y="800" width="320" height="179"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dsR-DL-fqP" id="PUv-Aa-98w">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="179"/>

@@ -129,6 +129,7 @@ NSString * const CODEMapViewControllerPushToCharitySegueIdentifier = @"CODEPushT
 
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+   /*
     if (self.selectedObject != nil){
         
         PFGeoPoint *geoPoint = self.selectedObject[@"location"];
@@ -144,6 +145,7 @@ NSString * const CODEMapViewControllerPushToCharitySegueIdentifier = @"CODEPushT
         region.center = track;
         [self.mapView setRegion:region];
     }
+    */
 }
 
 - (void)didReceiveMemoryWarning
@@ -253,10 +255,6 @@ NSString * const CODEMapViewControllerPushToCharitySegueIdentifier = @"CODEPushT
     for (UIView *subview in view.subviews) {
         [subview removeFromSuperview];
     }
-    //TODO: TAKE THIS OUT AFTER THE VIEW IS READY//
-    self.selectedObject = ((CODEAnnotation *) view.annotation).countryInfo;
-    [self performSegueWithIdentifier:CODEMapViewControllerPushToCharitySegueIdentifier sender:self];
-
 }
 
 /******************************************************************************/
@@ -293,9 +291,9 @@ NSString * const CODEMapViewControllerPushToCharitySegueIdentifier = @"CODEPushT
 
 - (void)infoTapped:(id)sender
 {
+    CODEDebugLog(@"hello?");
     if (self.selectedObject) {
-        [self performSegueWithIdentifier:CODEMapViewControllerPushToInfoSegueIdentifier
-                                  sender:sender];
+        [self performSegueWithIdentifier:CODEMapViewControllerPushToCharitySegueIdentifier sender:self];
     }
 }
 

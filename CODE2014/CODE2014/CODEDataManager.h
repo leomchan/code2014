@@ -19,5 +19,5 @@ typedef void (^CODEDataRetrievalBlock)(NSArray *items, NSError *error);
 - (void) getApplicableTransactionsForCountry:(PFObject *) selectedCountry withBlock:(CODEDataRetrievalBlock) block;
 - (void) getCharitiesByBusinessNumber:(NSArray *) arrayOfBNs withBlock:(CODEDataRetrievalBlock) block;
 - (void) getBusinessFinancialNumbers:(PFObject *) selectedBusiness withBlock:(CODEDataRetrievalBlock) block;
-
+- (void) getCharityPersonnel:(PFObject *) selectedBusiness withBlock:(CODEDataRetrievalBlock) block;
 @end

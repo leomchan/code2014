@@ -10,6 +10,13 @@
 #import "CODEPieChart.h"
 #import "CODEDataManager.h"
 
+@interface CODECharityTotalContributionsCells: UITableViewCell
+@property (nonatomic, weak) IBOutlet UILabel *totalContributionsLabel;
+@end
+
+@implementation  CODECharityTotalContributionsCells: UITableViewCell
+@end
+
 
 @interface CODECharityCostCells: UITableViewCell
 @property (nonatomic, weak) IBOutlet UILabel *charitableCostLabel;
@@ -58,7 +65,7 @@
     }else {
         self.totalLabel.text = @"N/A";
     }
-
+    
 }
 @end
 
@@ -170,6 +177,7 @@
 @interface CODEPieChartInfoViewController ()
 @property (nonatomic, strong) NSMutableDictionary *dictionaryOfInfoForPieGraph;
 @property (nonatomic, strong) PFObject *fiscalInfoDictionary;
+@property (nonatomic, strong) NSArray *arrayOfPersonnel;
 
 
 @end
@@ -215,6 +223,14 @@
         [self.pieTableView reloadData];
         
     }];
+    
+    
+    [[CODEDataManager manager] getBusinessFinancialNumbers:self.selectedOrganization withBlock:^(NSArray *items, NSError *error) {
+        CODEDebugLog(@"MMMM - %@", items);
+        [self.pieTableView reloadData];
+        
+    }];
+
 	// Do any additional setup after loading the view.
 }
 
@@ -224,52 +240,67 @@
     // Dispose of any resources that can be recreated.
 }
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
-}
-
-- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.row){
-        case 0:return 220;
-        case 1:return 150;
-        case 2:return 320;
-        case 3:return 180;
-        default: return 44;
+    switch (section){
+        case 0:return 4;
+        case 1:return [self.arrayOfPersonnel count];
+        default:
+            return 0;
     }
 }
 
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0){
+        switch (indexPath.row){
+            case 0:return 220;
+            case 1:return 150;
+            case 2:return 320;
+            case 3:return 180;
+            default: return 44;
+        }
+    }
+    else
+        return 44;
+}
+
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.row){
-        case 0:{
-            CODECharityOrganizationInfoCell * cell =[tableView dequeueReusableCellWithIdentifier:@"CODECharityOrganizationInfoCell"];
-            [cell configureCell:self.selectedOrganization];
-            return cell;
+    if (indexPath.section == 0){
+        switch (indexPath.row){
+            case 0:{
+                CODECharityOrganizationInfoCell * cell =[tableView dequeueReusableCellWithIdentifier:@"CODECharityOrganizationInfoCell"];
+                [cell configureCell:self.selectedOrganization];
+                return cell;
+            }
+                break;
+            case 1:{
+                CODECharityDonationCell * cell =[tableView dequeueReusableCellWithIdentifier:@"CODECharityDonationCell"];
+                return cell;
+                
+            }
+                break;
+            case 2:{
+                CODEPieChartTableViewCell * cell =[ tableView dequeueReusableCellWithIdentifier:@"CODEPieChartTableViewCell"];
+                [cell configureCell:self.dictionaryOfInfoForPieGraph];
+                return cell;
+            }
+                break;
+            case 3: {
+                CODECharityCostCells *cell = [tableView dequeueReusableCellWithIdentifier:@"CODECharityCostCells"];
+                [cell configureCell:self.fiscalInfoDictionary];
+                return cell;
+            }
+                break;
+            default:{
+                return [tableView dequeueReusableCellWithIdentifier:@"CODEPieChartInfoViewCell"];
+            }
+                break;
         }
-            break;
-        case 1:{
-            CODECharityDonationCell * cell =[tableView dequeueReusableCellWithIdentifier:@"CODECharityDonationCell"];
-            return cell;
-            
-        }
-            break;
-        case 2:{
-            CODEPieChartTableViewCell * cell =[ tableView dequeueReusableCellWithIdentifier:@"CODEPieChartTableViewCell"];
-            [cell configureCell:self.dictionaryOfInfoForPieGraph];
-            return cell;
-        }
-            break;
-        case 3: {
-            CODECharityCostCells *cell = [tableView dequeueReusableCellWithIdentifier:@"CODECharityCostCells"];
-            [cell configureCell:self.fiscalInfoDictionary];
-            return cell;
-        }
-            break;
-        default:{
-            return [tableView dequeueReusableCellWithIdentifier:@"CODEPieChartInfoViewCell"];
-        }
-            break;
+    }else {
+        PFObject *personnel = [self.arrayOfPersonnel objectAtIndex:indexPath.row];
+        return [tableView dequeueReusableCellWithIdentifier:@"CODEPieChartInfoViewCell"];
+
     }
 }
 
