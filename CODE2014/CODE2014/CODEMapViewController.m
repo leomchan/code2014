@@ -75,6 +75,8 @@ NSString * const CODEMapViewControllerPushToCharitySegueIdentifier = @"CODEPushT
 @interface CODEMapViewController ()
 @property (nonatomic, strong) NSMutableArray *arrayOfCountries;
 @property (nonatomic,assign) double maxContributions;
+@property (nonatomic,strong) NSArray *calloutViews;
+
 - (void)infoTapped:(id)sender;
 @end
 
@@ -243,18 +245,24 @@ NSString * const CODEMapViewControllerPushToCharitySegueIdentifier = @"CODEPushT
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                            action:@selector(infoTapped:)];
-    [calloutView addGestureRecognizer:tapGestureRecognizer];
+    [calloutView.infoButton addGestureRecognizer:tapGestureRecognizer];
     
-    [view addSubview:calloutView];
-    [view addSubview:calloutArrowImageView];
+    calloutView.frame = [view.superview convertRect:calloutView.frame fromView:view];
+    [view.superview addSubview:calloutView];
     
+    calloutArrowImageView.frame = [view.superview convertRect:calloutArrowImageView.frame fromView:view];
+    [view.superview addSubview:calloutArrowImageView];
+    
+    self.calloutViews = @[calloutView, calloutArrowImageView];
 }
 
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view
 {
-    for (UIView *subview in view.subviews) {
+    for (UIView *subview in self.calloutViews) {
         [subview removeFromSuperview];
     }
+    
+    self.calloutViews = nil;
 }
 
 /******************************************************************************/
