@@ -1,0 +1,40 @@
+#!/bin/bash
+
+tag=$1
+
+if [ "$tag" == "" ]
+then
+    echo "Currently at `git describe`"
+	echo "To tag and push, use: $0 <tag-name>"
+	exit 1
+fi
+
+if ! echo $tag | egrep '^[[:digit:]]+\.[[:digit:]]+(\.[[:digit:]]+)?([[:lower:]]+[[:digit:]]+)?$' &> /dev/null
+then
+    echo "Version must look like one of these examples: 1.0 1.0.4 1.0b2 1.0.2rc1"
+    exit 1
+fi
+
+if [[ ! -z `git status --porcelain` ]]
+then
+    echo "Please commit your local changes first."
+    exit 1
+fi
+
+if [[ ! -e .git ]]
+then
+    echo "Please run this script from your git root directory."
+    exit 1
+fi
+
+if [[ -e .git/refs/tags/$tag ]]
+then
+    echo "tag $tag already exists"
+    exit 1
+fi
+
+(agvtool next-version -all) || exit 2
+git commit -a -m "Increment CFBundleVersion for $tag" || exit 2
+git tag -m "Tag for $tag" -a $tag || exit 2
+git push origin master || exit 2
+git push --tags || exit 2

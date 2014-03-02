@@ -9,10 +9,11 @@
 #import "CODEMapViewController.h"
 #import "CODEDataManager.h"
 #import "CODECalloutView.h"
-#import "CODEListViewController.h"
+#import "TTTOrdinalNumberFormatter.h"
 
 NSString * const CODEMapViewControllerCountryAnnotationIdentifier = @"country";
 NSString * const CODEMapViewControllerPushToInfoSegueIdentifier = @"CODEPushToInfo";
+NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToList";
 
 @interface CODEMapViewController ()
 @property (nonatomic, strong) NSMutableArray *arrayOfCountries;
@@ -21,6 +22,7 @@ NSString * const CODEMapViewControllerPushToInfoSegueIdentifier = @"CODEPushToIn
 @interface CODEAnnotation : NSObject <MKAnnotation>
 @property (nonatomic)CLLocationCoordinate2D coordinate;
 @property (nonatomic, copy) NSString *title;
+@property (nonatomic,strong) PFObject *countryInfo;
 @end
 
 @implementation CODEAnnotation
@@ -54,7 +56,7 @@ NSString * const CODEMapViewControllerPushToInfoSegueIdentifier = @"CODEPushToIn
             if (geoPoint != nil){
                 CODEAnnotation *annotation = [[CODEAnnotation alloc] init];
                 annotation.coordinate = CLLocationCoordinate2DMake(geoPoint.latitude, geoPoint.longitude);
-                CODEDebugLog(@"%@",object);
+                annotation.countryInfo = object;
                 annotation.title = [object[@"englishName"] capitalizedString];
                 [annotationsToAdd addObject:annotation];
             }
@@ -120,17 +122,53 @@ NSString * const CODEMapViewControllerPushToInfoSegueIdentifier = @"CODEPushToIn
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
     const CGFloat centerOffset = 8.0f;
+    const CGFloat spacingFromEdge = 8.0f;
     
     CODECalloutView *calloutView = [[[NSBundle mainBundle] loadNibNamed:@"CODECalloutView" owner:self options:nil] objectAtIndex:0];
     UIImageView *calloutArrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"callout-arrow.png"]];
+    
     CGRect arrowFrame = calloutArrowImageView.frame;
     CGRect calloutFrame = calloutView.frame;
-    calloutFrame.origin = CGPointMake(-calloutFrame.size.width / 2.0f + centerOffset, -calloutFrame.size.height - arrowFrame.size.height);
-    calloutView.frame = calloutFrame;
-    [view addSubview:calloutView];
+
+    CGSize calloutSize = CGSizeMake(calloutFrame.size.width, calloutFrame.size.height + arrowFrame.size.height);
     
-    arrowFrame.origin = CGPointMake(-arrowFrame.size.width / 2.0f + centerOffset, -arrowFrame.size.height - 1.0f);
-    calloutArrowImageView.frame = arrowFrame;
+    // Does it fit above?
+    if (view.frame.origin.y - calloutSize.height > spacingFromEdge) {
+        calloutFrame.origin = CGPointMake(-calloutFrame.size.width / 2.0f + centerOffset, -calloutFrame.size.height - arrowFrame.size.height);
+        calloutView.frame = calloutFrame;
+        
+        arrowFrame.origin = CGPointMake(-arrowFrame.size.width / 2.0f + centerOffset, -arrowFrame.size.height - 1.0f);
+        calloutArrowImageView.frame = arrowFrame;
+    }
+    else {
+        calloutArrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"callout-arrow-top.png"]];
+        calloutFrame.origin = CGPointMake(-calloutFrame.size.width / 2.0f + centerOffset, arrowFrame.size.height + view.frame.size.height);
+        calloutView.frame = calloutFrame;
+        
+        arrowFrame.origin = CGPointMake(-arrowFrame.size.width / 2.0f + centerOffset, 1.0f + view.frame.size.height);
+        calloutArrowImageView.frame = arrowFrame;
+    }
+    
+    PFObject *countryInfo = ((CODEAnnotation *)view.annotation).countryInfo;
+    NSNumberFormatter *currencyFormatter = [[NSNumberFormatter alloc] init];
+    currencyFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
+    currencyFormatter.usesGroupingSeparator = YES;
+    
+    calloutView.donationAmountLabel.text = [currencyFormatter stringFromNumber:countryInfo[@"totalContributions"]];
+    
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+    numberFormatter.usesGroupingSeparator = YES;
+    
+    calloutView.charitiesLabel.text = [numberFormatter stringFromNumber:countryInfo[@"numContributors"]];
+    
+    TTTOrdinalNumberFormatter *ordinalFormatter = [[TTTOrdinalNumberFormatter alloc] init];
+    [ordinalFormatter setLocale:[NSLocale currentLocale]];
+    [ordinalFormatter setGrammaticalGender:TTTOrdinalNumberFormatterMaleGender];
+    
+    calloutView.rankLabel.text = [ordinalFormatter stringFromNumber:[NSNumber numberWithInt:5]];
+    
+    [view addSubview:calloutView];
     [view addSubview:calloutArrowImageView];
     
 }
@@ -148,10 +186,21 @@ NSString * const CODEMapViewControllerPushToInfoSegueIdentifier = @"CODEPushToIn
 
 #pragma mark - Storyboard
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"CODEPushToList"]){
+    if ([segue.identifier isEqualToString:CODEMapViewControllerPushToListSegueIdentifier]){
         CODEListViewController *controller = segue.destinationViewController;
-        controller.codeMapViewController = self;
+        controller.delegate = self;
     }
+}
+
+/******************************************************************************/
+/******************************************************************************/
+/******************************************************************************/
+
+#pragma mark - CODEListViewControllerDelegate
+
+- (void)listViewController:(CODEListViewController *)controller didSelectCountryInfo:(PFObject *)countryInfo
+{
+    self.selectedObject = countryInfo;
 }
 
 @end
