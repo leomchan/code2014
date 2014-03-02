@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="L14-pf-i41">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="L14-pf-i41">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -27,6 +27,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="L14-pf-i41" secondAttribute="trailing" id="7lc-X1-sEi"/>
+                            <constraint firstItem="L14-pf-i41" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="Sy9-tQ-DVT"/>
+                            <constraint firstItem="PqU-5g-G41" firstAttribute="top" secondItem="L14-pf-i41" secondAttribute="bottom" id="dZV-Pk-BLU"/>
+                            <constraint firstItem="L14-pf-i41" firstAttribute="top" secondItem="jF7-HD-plT" secondAttribute="bottom" id="o6H-bO-U4Y"/>
+                        </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Charity Pie" id="1V7-SX-kaV"/>
@@ -136,7 +142,7 @@ Here’s how it works:
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="LfR-GB-Oci">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="LfR-GB-Oci">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.89411764709999997" green="0.8980392157" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
@@ -485,6 +491,12 @@ Here’s how it works:
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstItem="LfR-GB-Oci" firstAttribute="leading" secondItem="eOz-7g-fzP" secondAttribute="leading" id="UX1-cJ-DIO"/>
+                            <constraint firstItem="cmZ-N4-7iS" firstAttribute="top" secondItem="LfR-GB-Oci" secondAttribute="bottom" id="WNt-jD-v25"/>
+                            <constraint firstItem="LfR-GB-Oci" firstAttribute="top" secondItem="qWX-RO-5lA" secondAttribute="bottom" id="XX3-0V-UnI"/>
+                            <constraint firstAttribute="trailing" secondItem="LfR-GB-Oci" secondAttribute="trailing" id="oow-MP-31y"/>
+                        </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Charity Details" id="c10-Fa-Ahg">
@@ -514,7 +526,7 @@ Here’s how it works:
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="SuY-85-5PO">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="SuY-85-5PO">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -525,6 +537,12 @@ Here’s how it works:
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="SuY-85-5PO" secondAttribute="trailing" id="EtK-ux-01a"/>
+                            <constraint firstItem="ETt-wZ-Axc" firstAttribute="top" secondItem="SuY-85-5PO" secondAttribute="bottom" id="M2A-63-xxa"/>
+                            <constraint firstItem="SuY-85-5PO" firstAttribute="top" secondItem="v36-Lk-7oK" secondAttribute="bottom" id="Obk-OI-wIq"/>
+                            <constraint firstItem="SuY-85-5PO" firstAttribute="leading" secondItem="UNd-NL-4gy" secondAttribute="leading" id="qQu-nh-xxe"/>
+                        </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Charities" id="Z67-L8-0hM">
