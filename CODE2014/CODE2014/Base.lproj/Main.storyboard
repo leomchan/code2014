@@ -102,12 +102,6 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ye8-an-5pi" id="EVu-vk-Os0">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="piePlate" translatesAutoresizingMaskIntoConstraints="NO" id="ZYl-bh-aaJ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                </imageView>
-                                            </subviews>
                                             <color key="backgroundColor" red="0.89411764709999997" green="0.8980392157" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.89411764709999997" green="0.8980392157" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
@@ -509,7 +503,8 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.3529411764705882" green="0.74117647058823533" blue="0.70980392156862748" alpha="1" colorSpace="deviceRGB"/>
                         <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="16"/>
+                            <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="20"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -525,7 +520,6 @@
     <resources>
         <image name="TriangleAccent" width="68" height="20"/>
         <image name="homeButton" width="29" height="29"/>
-        <image name="piePlate" width="240" height="240"/>
         <image name="triangle1" width="19" height="22"/>
         <image name="triangle2" width="19" height="22"/>
         <image name="triangle3" width="19" height="22"/>

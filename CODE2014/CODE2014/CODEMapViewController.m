@@ -221,6 +221,7 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
     CODEAnnotationView *annotationView = (CODEAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:CODEMapViewControllerCountryAnnotationIdentifier];
     if (!annotationView) {
         annotationView = [[CODEAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:CODEMapViewControllerCountryAnnotationIdentifier];
+       // annotationView.backgroundColor = [UIColor blueColor];
     }
     else {
         annotationView.annotation = annotation;
@@ -255,6 +256,7 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
+
     PFObject *countryInfo = ((CODEAnnotation *)view.annotation).countryInfo;
     self.selectedObject = countryInfo;
     [self showCallout];
@@ -319,7 +321,7 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
 
 - (void)infoTapped:(id)sender
 {
-    CODEDebugLog(@"hello?");
+    //CODEDebugLog(@"hello?");
     if (self.selectedObject) {
         [self performSegueWithIdentifier:CODEMapViewControllerPushToCharitySegueIdentifier sender:self];
     }

@@ -235,7 +235,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    CODEDebugLog(@"RRRRR - %@", self.selectedOrganization);
+    //CODEDebugLog(@"RRRRR - %@", self.selectedOrganization);
     
     
     self.dictionaryOfInfoForPieGraph = [NSMutableDictionary dictionary];

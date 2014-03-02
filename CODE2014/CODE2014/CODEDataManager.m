@@ -88,7 +88,7 @@ static CODEDataManager *manager = nil;
             
             [self.arrayOfCountries addObjectsFromArray:objects];
             // The find succeeded. Add the returned objects to allObjects
-            CODEDebugLog(@"%lu", (unsigned long)[self.arrayOfCountries count]);
+            // CODEDebugLog(@"%lu", (unsigned long)[self.arrayOfCountries count]);
             if (objects.count == 1000) {
                 // There might be more objects in the table. Update the skip value and execute the query again.
                 NSInteger skip = [query skip];
