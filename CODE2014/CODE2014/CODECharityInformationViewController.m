@@ -8,9 +8,12 @@
 
 #import "CODECharityInformationViewController.h"
 #import "CODEDataManager.h"
+#import "CODEPieChartInfoViewController.h"
+#import "CODEPieChartInfoViewController.h"
 
 @interface CODECharityInformationViewController ()
 @property (nonatomic, strong) NSArray *arrayOfBusinesses;
+@property (nonatomic, strong) PFObject *selectedBusiness;
 @end
 
 @implementation CODECharityInformationViewController
@@ -37,6 +40,8 @@
         
         [[CODEDataManager manager] getCharitiesByBusinessNumber:[set allObjects] withBlock:^(NSArray *items, NSError *error) {
             self.arrayOfBusinesses = items;
+           // CODEDebugLog(@"%@", items);
+           // CODEDebugLog(@"%lu", (unsigned long)[self.arrayOfBusinesses count]);
             [self.mainTableView reloadData];
         }];
         
@@ -59,6 +64,12 @@
     return [self.arrayOfBusinesses count];
 }
 
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.row){
+        default:return 44.0f;
+    }
+}
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TEST"];
@@ -69,6 +80,15 @@
     return tableViewCell;
 }
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    PFObject *object = [self.arrayOfBusinesses objectAtIndex:indexPath.row];
+    self.selectedBusiness = object;
+    [self performSegueWithIdentifier:@"CODEPushToCharityDetails" sender:self];
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"CODEPushToCharityDetails"]){
+        CODEPieChartInfoViewController *controller = segue.destinationViewController;
+        controller.selectedOrganization = self.selectedBusiness;
+    }
 }
 @end

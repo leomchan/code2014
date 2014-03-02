@@ -32,6 +32,16 @@ static CODEDataManager *manager = nil;
     return manager;
 }
 
+- (void) getBusinessFinancialNumbers:(PFObject *) selectedBusiness withBlock:(CODEDataRetrievalBlock) block {
+    PFQuery *query = [PFQuery queryWithClassName:@"Fin"];
+    [query setLimit:1000];
+    [query whereKey:@"BN" equalTo:selectedBusiness[@"BN"]];
+    [query orderByAscending:@"englishName"];
+    [query setCachePolicy:kPFCachePolicyNetworkOnly];
+    [query findObjectsInBackgroundWithBlock:block];
+    
+}
+
 - (void) getApplicableCountriesWithBlock:(CODEDataRetrievalBlock) block{
     PFQuery *query = [PFQuery queryWithClassName:@"CountryInfo"];
     [query setLimit:1000];
