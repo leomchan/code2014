@@ -72,6 +72,7 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
 
 @interface CODEMapViewController ()
 @property (nonatomic, strong) NSMutableArray *arrayOfCountries;
+@property (nonatomic,assign) double maxContributions;
 - (void)infoTapped:(id)sender;
 @end
 
@@ -96,6 +97,7 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
     [[CODEDataManager manager] getApplicableCountriesWithBlock:^(NSArray *items, NSError *error) {
         
         self.arrayOfCountries = [NSMutableArray arrayWithArray:items];
+        self.maxContributions = 0.0;
         
         NSMutableArray *annotationsToAdd = [NSMutableArray array];
         for (PFObject *object in self.arrayOfCountries){
@@ -104,6 +106,11 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
                 CODEAnnotation *annotation = [[CODEAnnotation alloc] init];
                 annotation.coordinate = CLLocationCoordinate2DMake(geoPoint.latitude, geoPoint.longitude);
                 annotation.countryInfo = object;
+                NSNumber *totalContributions = object[@"totalContributions"];
+                if (totalContributions) {
+                    self.maxContributions = MAX(self.maxContributions, [totalContributions doubleValue]);
+                }
+                
                 annotation.title = [object[@"englishName"] capitalizedString];
                 [annotationsToAdd addObject:annotation];
             }
@@ -159,10 +166,9 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
     }
     
     CODEAnnotation *customAnnotation = ((CODEAnnotation *)annotation);
-    CGFloat value = [customAnnotation.countryInfo[@"totalContributions"] floatValue];
-    value = MIN(MAX(0.0f, value), 100000000);
-    CGFloat t = value / 100000000;
-    CODEDebugLog(@"%@ %f %f", customAnnotation.countryInfo[@"countryCode"], [customAnnotation.countryInfo[@"totalContributions"] floatValue], t);
+    double value = [customAnnotation.countryInfo[@"totalContributions"] doubleValue];
+    value = MIN(MAX(0.0f, value), self.maxContributions);
+    double t = value / self.maxContributions;
     annotationView.pinColor = [UIColor colorWithHue:0.6f - 0.33f * t
                                          saturation:0.8f
                                          brightness:0.95f
