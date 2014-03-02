@@ -192,8 +192,13 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
         CLLocationCoordinate2D track;
         track.latitude = geoPoint.latitude;
         track.longitude = geoPoint.longitude;
-      
-        [self.mapView setCenterCoordinate:track];
+        MKCoordinateRegion region;
+        MKCoordinateSpan span;
+        span.latitudeDelta = 5;
+        span.longitudeDelta = 5;
+        region.span = span;
+        region.center = track;
+        [self.mapView setRegion:region];
     }
 
 }
