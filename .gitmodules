@@ -1,3 +1,6 @@
 [submodule "CODE2014/External/FormatterKit"]
 	path = CODE2014/External/FormatterKit
 	url = https://github.com/mattt/FormatterKit.git
+[submodule "parse/external/oauth"]
+	path = parse/external/oauth
+	url = https://github.com/nicnocquee/Oauth-Module-for-Parse-Cloud-Code.git
