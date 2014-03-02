@@ -30,6 +30,40 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
 @implementation CODEAnnotation
 @end
 
+@interface CODEAnnotationView : MKAnnotationView
+@property(nonatomic,strong) UIImage *postImage;
+@property(nonatomic,strong) UIColor *pinColor;
+@end
+
+@implementation CODEAnnotationView
+
+- (id)initWithAnnotation:(id<MKAnnotation>)annotation reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
+    if (self) {
+        self.frame = CGRectMake(0.0f, 0.0f, 30.0f, 40.0f);
+        self.backgroundColor = [UIColor clearColor];
+        self.postImage = [UIImage imageNamed:@"post.png"];
+        self.centerOffset = CGPointMake(10.0f, -16.0f);
+        self.pinColor = [UIColor redColor];
+    }
+    return self;
+}
+
+- (void)drawRect:(CGRect)rect
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    [self.postImage drawInRect:CGRectMake(2.0f, 18.0f, 28.0f, 31.0f)];
+    
+    CGContextSetFillColorWithColor(context, self.pinColor.CGColor);
+    CGContextFillEllipseInRect(context, CGRectMake(0.0f, 10.0f, 13.0f, 13.0f));
+    
+    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+    CGContextFillEllipseInRect(context, CGRectMake(3.0f, 12.0f, 3.0f, 3.0f));
+}
+
+@end
 /******************************************************************************/
 /******************************************************************************/
 /******************************************************************************/
@@ -116,9 +150,9 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
 {
-    MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:CODEMapViewControllerCountryAnnotationIdentifier];
+    CODEAnnotationView *annotationView = (CODEAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:CODEMapViewControllerCountryAnnotationIdentifier];
     if (!annotationView) {
-        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:CODEMapViewControllerCountryAnnotationIdentifier];
+        annotationView = [[CODEAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:CODEMapViewControllerCountryAnnotationIdentifier];
     }
     else {
         annotationView.annotation = annotation;
