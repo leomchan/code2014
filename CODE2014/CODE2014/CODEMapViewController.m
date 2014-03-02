@@ -130,6 +130,8 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
 @property (nonatomic,strong) NSArray *calloutViews;
 
 - (void)infoTapped:(id)sender;
+- (void)dismissCallout;
+
 @end
 
 @implementation CODEMapViewController
@@ -318,11 +320,12 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
 
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view
 {
-    for (UIView *subview in self.calloutViews) {
-        [subview removeFromSuperview];
-    }
-    
-    self.calloutViews = nil;
+    [self dismissCallout];
+}
+
+- (void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
+{
+    [self dismissCallout];
 }
 
 /******************************************************************************/
@@ -363,6 +366,21 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
     if (self.selectedObject) {
         [self performSegueWithIdentifier:CODEMapViewControllerPushToCharitySegueIdentifier sender:self];
     }
+}
+
+/******************************************************************************/
+/******************************************************************************/
+/******************************************************************************/
+
+#pragma mark - Methods
+
+- (void)dismissCallout
+{
+    for (UIView *subview in self.calloutViews) {
+        [subview removeFromSuperview];
+    }
+    
+    self.calloutViews = nil;
 }
 
 @end
