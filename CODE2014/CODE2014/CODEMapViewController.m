@@ -21,6 +21,7 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
 @interface CODEAnnotation : NSObject <MKAnnotation>
 @property (nonatomic)CLLocationCoordinate2D coordinate;
 @property (nonatomic, copy) NSString *title;
+@property (nonatomic,strong) PFObject *countryInfo;
 @end
 
 @implementation CODEAnnotation
@@ -54,7 +55,7 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
             if (geoPoint != nil){
                 CODEAnnotation *annotation = [[CODEAnnotation alloc] init];
                 annotation.coordinate = CLLocationCoordinate2DMake(geoPoint.latitude, geoPoint.longitude);
-                CODEDebugLog(@"%@",object);
+                annotation.countryInfo = object;
                 annotation.title = [object[@"englishName"] capitalizedString];
                 [annotationsToAdd addObject:annotation];
             }
@@ -146,6 +147,19 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
         arrowFrame.origin = CGPointMake(-arrowFrame.size.width / 2.0f + centerOffset, 1.0f + view.frame.size.height);
         calloutArrowImageView.frame = arrowFrame;
     }
+    
+    PFObject *countryInfo = ((CODEAnnotation *)view.annotation).countryInfo;
+    NSNumberFormatter *currencyFormatter = [[NSNumberFormatter alloc] init];
+    currencyFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
+    currencyFormatter.usesGroupingSeparator = YES;
+    
+    calloutView.donationAmountLabel.text = [currencyFormatter stringFromNumber:countryInfo[@"totalContributions"]];
+    
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+    numberFormatter.usesGroupingSeparator = YES;
+    
+    calloutView.charitiesLabel.text = [numberFormatter stringFromNumber:countryInfo[@"numContributors"]];
     
     [view addSubview:calloutView];
     [view addSubview:calloutArrowImageView];
