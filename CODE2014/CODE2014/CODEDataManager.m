@@ -33,7 +33,7 @@ static CODEDataManager *manager = nil;
 }
 
 - (void) getCharityPersonnel:(PFObject *) selectedBusiness withBlock:(CODEDataRetrievalBlock) block {
-    PFQuery *query = [PFQuery queryWithClassName:@"dir"];
+    PFQuery *query = [PFQuery queryWithClassName:@"Dir"];
     [query setLimit:1000];
     [query whereKey:@"BN" equalTo:selectedBusiness[@"BN"]];
     [query setCachePolicy:kPFCachePolicyNetworkOnly];

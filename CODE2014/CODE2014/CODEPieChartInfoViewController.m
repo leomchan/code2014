@@ -10,6 +10,13 @@
 #import "CODEPieChart.h"
 #import "CODEDataManager.h"
 
+@interface CODEWebConnectionCell:UITableViewCell
+@property (nonatomic, weak) IBOutlet UIButton *linkButton;
+@end
+
+@implementation CODEWebConnectionCell
+@end
+
 @interface CODECharityTotalContributionsCells: UITableViewCell
 @property (nonatomic, weak) IBOutlet UILabel *totalContributionsLabel;
 @end
@@ -17,6 +24,24 @@
 @implementation  CODECharityTotalContributionsCells: UITableViewCell
 @end
 
+
+@interface CODECharityPersonnelCell: UITableViewCell
+@property (nonatomic, weak) IBOutlet UILabel *nameLabel;
+@property (nonatomic, weak) IBOutlet UILabel *positionLabel;
+- (void) configureCell: (PFObject *) personnel;
+@end
+
+@implementation  CODECharityPersonnelCell: UITableViewCell
+- (void) configureCell: (PFObject *) personnel{
+    
+    NSString *name = [NSString stringWithFormat:@"%@ %@", [personnel[@"First_Name"] capitalizedString], [personnel[@"Last_Name"] capitalizedString]];
+    NSString *position = [personnel[@"Position"]capitalizedString];
+    
+    self.nameLabel.text = name;
+    self.positionLabel.text = position;
+    
+}
+@end
 
 @interface CODECharityCostCells: UITableViewCell
 @property (nonatomic, weak) IBOutlet UILabel *charitableCostLabel;
@@ -30,38 +55,48 @@
 
 @implementation CODECharityCostCells
 - (void) configureCell: (PFObject *) fiscalInfo{
+    NSNumberFormatter *currencyFormatter = [[NSNumberFormatter alloc] init];
+    currencyFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
+    currencyFormatter.usesGroupingSeparator = YES;
+
     if (fiscalInfo[@"f5000"] != nil){
-        self.charitableCostLabel.text = fiscalInfo[@"f5000"];
+        
+        self.charitableCostLabel.text = [currencyFormatter stringFromNumber:[NSNumber numberWithInt: [fiscalInfo[@"f5000"] intValue]]] ;
     }else {
         self.charitableCostLabel.text = @"N/A";
     }
     
     if (fiscalInfo[@"f5010"] != nil){
-        self.managementCostLabel.text = fiscalInfo[@"f5010"];
+        self.managementCostLabel.text = [currencyFormatter stringFromNumber:[NSNumber numberWithInt: [fiscalInfo[@"f5010"] intValue]]] ;
+
     }else {
         self.managementCostLabel.text = @"N/A";
     }
     
     if (fiscalInfo[@"f5020"] != nil){
-        self.fundraisingLabel.text = fiscalInfo[@"f5020"];
+        self.fundraisingLabel.text = [currencyFormatter stringFromNumber:[NSNumber numberWithInt: [fiscalInfo[@"f5020"] intValue]]] ;
+
     }else {
         self.fundraisingLabel.text = @"N/A";
     }
     
     if (fiscalInfo[@"f5030"] != nil){
-        self.politicalLabel.text = fiscalInfo[@"f5030"];
+        self.politicalLabel.text = [currencyFormatter stringFromNumber:[NSNumber numberWithInt: [fiscalInfo[@"f5030"] intValue]]] ;
+
     }else {
         self.politicalLabel.text = @"N/A";
     }
     
     if (fiscalInfo[@"f5040"] != nil){
-        self.otherExpensesLabel.text = fiscalInfo[@"f5040"];
+        self.otherExpensesLabel.text = [currencyFormatter stringFromNumber:[NSNumber numberWithInt: [fiscalInfo[@"f5040"] intValue]]] ;
+
     }else {
         self.otherExpensesLabel.text = @"N/A";
     }
     
     if (fiscalInfo[@"f5100"] != nil){
-        self.totalLabel.text = fiscalInfo[@"f5100"];
+        self.totalLabel.text = [currencyFormatter stringFromNumber:[NSNumber numberWithInt: [fiscalInfo[@"f5100"] intValue]]] ;
+
     }else {
         self.totalLabel.text = @"N/A";
     }
@@ -196,6 +231,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    CODEDebugLog(@"RRRRR - %@", self.selectedOrganization);
+    
+    
     self.dictionaryOfInfoForPieGraph = [NSMutableDictionary dictionary];
     [[CODEDataManager manager] getBusinessFinancialNumbers:self.selectedOrganization withBlock:^(NSArray *items, NSError *error) {
         PFObject *object = [items firstObject]; //there should only ever be one object//
@@ -219,18 +257,16 @@
             [self.dictionaryOfInfoForPieGraph setObject:object[@"f5100"] forKey:@"5100"];
         }
         
-        CODEDebugLog(@"%@", self.dictionaryOfInfoForPieGraph);
         [self.pieTableView reloadData];
         
     }];
     
     
-    [[CODEDataManager manager] getBusinessFinancialNumbers:self.selectedOrganization withBlock:^(NSArray *items, NSError *error) {
-        CODEDebugLog(@"MMMM - %@", items);
+    [[CODEDataManager manager] getCharityPersonnel:self.selectedOrganization withBlock:^(NSArray *items, NSError *error) {
+        self.arrayOfPersonnel = items;
         [self.pieTableView reloadData];
-        
     }];
-
+    
 	// Do any additional setup after loading the view.
 }
 
@@ -240,12 +276,20 @@
     // Dispose of any resources that can be recreated.
 }
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section){
-        case 0:return 4;
-        case 1:return [self.arrayOfPersonnel count];
+        case 0:return 3;
+        case 1:return [self.arrayOfPersonnel count] + 2;
+        case 2:{
+            if (self.selectedOrganization[@"Website"] != nil){
+                return 1;
+            }else {
+                return 0;
+            }
+        }
+            break;
         default:
             return 0;
     }
@@ -254,15 +298,22 @@
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0){
         switch (indexPath.row){
-            case 0:return 220;
-            case 1:return 150;
-            case 2:return 320;
-            case 3:return 180;
+            case 0:return 200;
+            case 1:return 320;
+            case 2:return 180;
             default: return 44;
         }
     }
-    else
-        return 44;
+    else if (indexPath.section == 1){
+        if (indexPath.row == 0){
+            return 80;
+        }else if (indexPath.row -1 >= [self.arrayOfPersonnel count]){
+            return 40;
+        }else
+            return 44;
+    }else {
+        return 180;
+    }
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -274,19 +325,14 @@
                 return cell;
             }
                 break;
+           
             case 1:{
-                CODECharityDonationCell * cell =[tableView dequeueReusableCellWithIdentifier:@"CODECharityDonationCell"];
-                return cell;
-                
-            }
-                break;
-            case 2:{
                 CODEPieChartTableViewCell * cell =[ tableView dequeueReusableCellWithIdentifier:@"CODEPieChartTableViewCell"];
                 [cell configureCell:self.dictionaryOfInfoForPieGraph];
                 return cell;
             }
                 break;
-            case 3: {
+            case 2: {
                 CODECharityCostCells *cell = [tableView dequeueReusableCellWithIdentifier:@"CODECharityCostCells"];
                 [cell configureCell:self.fiscalInfoDictionary];
                 return cell;
@@ -297,13 +343,35 @@
             }
                 break;
         }
+    }else if (indexPath.section == 1) {
+        if (indexPath.row == 0){
+            return [tableView dequeueReusableCellWithIdentifier:@"infoCell"];
+        }else if (indexPath.row-1 >= [self.arrayOfPersonnel count]){
+            return [tableView dequeueReusableCellWithIdentifier:@"endCell"];
+        }else {
+            PFObject *personnel = [self.arrayOfPersonnel objectAtIndex:indexPath.row-1];
+            CODECharityPersonnelCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CODECharityPersonnelCell"];
+            [cell configureCell:personnel];
+            return cell;
+        }
     }else {
-        PFObject *personnel = [self.arrayOfPersonnel objectAtIndex:indexPath.row];
-        return [tableView dequeueReusableCellWithIdentifier:@"CODEPieChartInfoViewCell"];
-
+        CODEWebConnectionCell * cell = [tableView dequeueReusableCellWithIdentifier:@"webCell"];
+        [cell.linkButton setTitle:self.selectedOrganization[@"Website"] forState:UIControlStateNormal];
+        [cell.linkButton addTarget:self action:@selector(webLinkTapped:) forControlEvents:UIControlEventTouchUpInside];
+        return cell;
     }
 }
 
+- (void) webLinkTapped: (id) sender {
+    
+    NSString *d =self.selectedOrganization[@"Website"];
+    NSString *string = @"hello bla bla";
+    if ([string rangeOfString:@"http://"].location == NSNotFound) {
+        d = [NSString stringWithFormat:@"http://%@",self.selectedOrganization[@"Website"]];
+    }
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:d]];
+   }
 
 
 @end
