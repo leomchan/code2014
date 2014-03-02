@@ -214,6 +214,9 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
     
     PFObject *countryInfo = ((CODEAnnotation *)view.annotation).countryInfo;
     self.selectedObject = countryInfo;
+    
+    calloutView.countryLabel.text = [countryInfo[@"englishName"] uppercaseString];
+    
     NSNumberFormatter *currencyFormatter = [[NSNumberFormatter alloc] init];
     currencyFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
     currencyFormatter.usesGroupingSeparator = YES;
@@ -224,7 +227,7 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
     numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
     numberFormatter.usesGroupingSeparator = YES;
     
-    calloutView.charitiesLabel.text = [numberFormatter stringFromNumber:countryInfo[@"numContributors"]];
+    calloutView.charitiesLabel.text = [numberFormatter stringFromNumber:countryInfo[@"numPrograms"]];
     
     TTTOrdinalNumberFormatter *ordinalFormatter = [[TTTOrdinalNumberFormatter alloc] init];
     [ordinalFormatter setLocale:[NSLocale currentLocale]];
