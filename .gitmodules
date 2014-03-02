@@ -4,3 +4,6 @@
 [submodule "parse/external/oauth"]
 	path = parse/external/oauth
 	url = https://github.com/nicnocquee/Oauth-Module-for-Parse-Cloud-Code.git
+[submodule "CODE2014/External/MBProgressHUD"]
+	path = CODE2014/External/MBProgressHUD
+	url = https://github.com/jdg/MBProgressHUD.git

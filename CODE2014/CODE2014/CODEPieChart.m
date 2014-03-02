@@ -27,13 +27,13 @@
 - (id) initWithFrame:(CGRect)frame andDictionary: (NSDictionary *) dictionary {
     self = [super initWithFrame:frame];
     self.backgroundColor = [UIColor clearColor];
-
     self.infoDictionary = dictionary;
     
     return self;
 }
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
+
     
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     
@@ -52,9 +52,9 @@
         endAngle = startAngle + charitables;
         CODEDebugLog(@"A %f, %f, %f", startAngle, endAngle, charitables);
 
-        CGContextAddArc(ctx, 160, 160, 60, startAngle, endAngle, false);
+        CGContextAddArc(ctx, 160, 160, 57, startAngle, endAngle, false);
         CGContextSetStrokeColorWithColor(ctx,color.CGColor);
-        CGContextSetLineWidth(ctx, 120);
+        CGContextSetLineWidth(ctx, 114);
         CGContextStrokePath(ctx);
         startAngle = endAngle;
 
@@ -71,9 +71,9 @@
         endAngle = startAngle + expenditures;
         CODEDebugLog(@"B %f, %f", endAngle, expenditures);
 
-        CGContextAddArc(ctx, 160, 160, 60, startAngle, endAngle, false);
+        CGContextAddArc(ctx, 160, 160, 57, startAngle, endAngle, false);
         CGContextSetStrokeColorWithColor(ctx,color.CGColor);
-        CGContextSetLineWidth(ctx, 120);
+        CGContextSetLineWidth(ctx, 114);
         CGContextStrokePath(ctx);
         startAngle = endAngle;
         
@@ -90,9 +90,9 @@
         CODEDebugLog(@"C %f, %f", endAngle, charitables);
 
         
-        CGContextAddArc(ctx, 160, 160, 60, startAngle, endAngle, false);
+        CGContextAddArc(ctx, 160, 160, 57, startAngle, endAngle, false);
         CGContextSetStrokeColorWithColor(ctx,color.CGColor);
-        CGContextSetLineWidth(ctx, 120);
+        CGContextSetLineWidth(ctx, 114);
         CGContextStrokePath(ctx);
         startAngle = endAngle;
         
@@ -108,9 +108,9 @@
         endAngle = startAngle + management;
         CODEDebugLog(@"D %f, %f", endAngle, management);
         
-        CGContextAddArc(ctx, 160, 160, 60, startAngle, endAngle, false);
+        CGContextAddArc(ctx, 160, 160, 57, startAngle, endAngle, false);
         CGContextSetStrokeColorWithColor(ctx,color.CGColor);
-        CGContextSetLineWidth(ctx, 120);
+        CGContextSetLineWidth(ctx, 114);
         CGContextStrokePath(ctx);
         startAngle = endAngle;
         
@@ -126,24 +126,24 @@
         CODEDebugLog(@"E %f, %f", endAngle, charitables);
 
     
-        CGContextAddArc(ctx, 160, 160, 60, startAngle, endAngle, false);
+        CGContextAddArc(ctx, 160, 160, 57, startAngle, endAngle, false);
         CGContextSetStrokeColorWithColor(ctx,color.CGColor);
-        CGContextSetLineWidth(ctx, 120);
+        CGContextSetLineWidth(ctx, 114);
         CGContextStrokePath(ctx);
         startAngle = endAngle;
         
     }
-    
+    /*
     if (startAngle == 0.0f){
     UIColor *color = [UIColor colorWithRed:175.0f/255.0f green:173.0f/255.0f blue:176.0f/255.0f alpha:1.0f];
     CODEDebugLog(@"H %f, %f", startAngle, endAngle);
 
-    CGContextAddArc(ctx, 160, 160, 60, startAngle, M_PI *2, false);
+    CGContextAddArc(ctx, 160, 160, 57, startAngle, M_PI *2, false);
     CGContextSetStrokeColorWithColor(ctx,color.CGColor);
-    CGContextSetLineWidth(ctx, 120);
+    CGContextSetLineWidth(ctx, 114);
     CGContextStrokePath(ctx);
     }
-    
+    */
     
     
 }

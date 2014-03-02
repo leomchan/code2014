@@ -59,7 +59,7 @@
     }else {
         string = object[@"countryCode"];
     }
-    
+    tableViewCell.textLabel.font = [UIFont fontWithName:@"AmericanTypewriter" size:14];
     tableViewCell.textLabel.text = [string capitalizedString];
     return tableViewCell;
 }

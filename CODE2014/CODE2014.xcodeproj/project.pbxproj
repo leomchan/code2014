@@ -54,6 +54,7 @@
 		F8F11DEE18C1ADA500AD6890 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F8F11DEC18C1ADA500AD6890 /* InfoPlist.strings */; };
 		F8F11DF018C1ADA500AD6890 /* CODE2014Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F11DEF18C1ADA500AD6890 /* CODE2014Tests.m */; };
 		F8F11DFC18C1AF9100AD6890 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F11DFB18C1AF9100AD6890 /* Parse.framework */; };
+		F8F2679C18C3C43900BD7404 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F2679B18C3C43900BD7404 /* MBProgressHUD.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +136,8 @@
 		F8F11DEF18C1ADA500AD6890 /* CODE2014Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CODE2014Tests.m; sourceTree = "<group>"; };
 		F8F11DF918C1AE2200AD6890 /* CODE2014-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CODE2014-Prefix.pch"; sourceTree = "<group>"; };
 		F8F11DFB18C1AF9100AD6890 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = External/Parse.framework; sourceTree = "<group>"; };
+		F8F2679A18C3C43900BD7404 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = External/MBProgressHUD/MBProgressHUD.h; sourceTree = "<group>"; };
+		F8F2679B18C3C43900BD7404 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = External/MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -327,9 +330,19 @@
 		F8F11DFA18C1AE6C00AD6890 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				F8F2679918C3C3FB00BD7404 /* MBProgressHUD */,
 				81EF0BCB18C2B78B00B73203 /* FormatterKit */,
 			);
 			name = External;
+			sourceTree = "<group>";
+		};
+		F8F2679918C3C3FB00BD7404 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				F8F2679A18C3C43900BD7404 /* MBProgressHUD.h */,
+				F8F2679B18C3C43900BD7404 /* MBProgressHUD.m */,
+			);
+			name = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -446,6 +459,7 @@
 				F8EF274F18C2534500598794 /* CODEMapViewController.m in Sources */,
 				81EF0BE318C2B79E00B73203 /* TTTURLRequestFormatter.m in Sources */,
 				81EF0BE218C2B79E00B73203 /* TTTUnitOfInformationFormatter.m in Sources */,
+				F8F2679C18C3C43900BD7404 /* MBProgressHUD.m in Sources */,
 				81EF0BDE18C2B79E00B73203 /* TTTColorFormatter.m in Sources */,
 				81EF0B8A18C2942300B73203 /* CODECalloutView.m in Sources */,
 				81EF0BE118C2B79E00B73203 /* TTTTimeIntervalFormatter.m in Sources */,

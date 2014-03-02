@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--List View Controller - Welcome!-->
+        <!--List View Controller - Charity Pie-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="CODEListViewController" sceneMemberID="viewController">
@@ -29,7 +29,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" title="Welcome!" id="1V7-SX-kaV"/>
+                    <navigationItem key="navigationItem" title="Charity Pie" id="1V7-SX-kaV"/>
                     <connections>
                         <outlet property="mainTableView" destination="L14-pf-i41" id="DSv-1l-PgV"/>
                     </connections>
@@ -38,7 +38,7 @@
             </objects>
             <point key="canvasLocation" x="448" y="-163"/>
         </scene>
-        <!--Map View Controller - Map!-->
+        <!--Map View Controller - Charity Pie-->
         <scene sceneID="45t-R9-nT9">
             <objects>
                 <viewController storyboardIdentifier="CODEMapViewController" id="V73-uJ-wEz" customClass="CODEMapViewController" sceneMemberID="viewController">
@@ -61,7 +61,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" title="Map!" id="Len-Lo-4MQ">
+                    <navigationItem key="navigationItem" title="Charity Pie" id="Len-Lo-4MQ">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="H5i-3P-9Gs"/>
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="search" id="NNu-Hh-hmO">
                             <connections>
                                 <segue destination="vXZ-lx-hvc" kind="push" identifier="CODEPushToList" id="bTR-YN-Qaq"/>
@@ -101,6 +102,12 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ye8-an-5pi" id="EVu-vk-Os0">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="piePlate" translatesAutoresizingMaskIntoConstraints="NO" id="ZYl-bh-aaJ">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                </imageView>
+                                            </subviews>
                                             <color key="backgroundColor" red="0.89411764709999997" green="0.8980392157" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.89411764709999997" green="0.8980392157" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
@@ -358,6 +365,26 @@
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="triangle1" translatesAutoresizingMaskIntoConstraints="NO" id="JBb-er-JXW">
+                                                    <rect key="frame" x="5" y="9" width="19" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="triangle2" translatesAutoresizingMaskIntoConstraints="NO" id="W1U-4C-Y0S">
+                                                    <rect key="frame" x="5" y="34" width="19" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="triangle4" translatesAutoresizingMaskIntoConstraints="NO" id="2bD-is-kCy">
+                                                    <rect key="frame" x="5" y="91" width="19" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="triangle5" translatesAutoresizingMaskIntoConstraints="NO" id="D9q-CL-BbB">
+                                                    <rect key="frame" x="5" y="117" width="19" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="triangle3" translatesAutoresizingMaskIntoConstraints="NO" id="0BK-kx-kzI">
+                                                    <rect key="frame" x="5" y="64" width="19" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" red="0.89411764709999997" green="0.8980392157" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                                         </tableViewCellContentView>
@@ -470,9 +497,13 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6Nl-46-KdZ" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WKT-ln-tbo">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="WKT-ln-tbo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.3529411764705882" green="0.74117647058823533" blue="0.70980392156862748" alpha="1" colorSpace="deviceRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="16"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -486,7 +517,14 @@
     </scenes>
     <resources>
         <image name="TriangleAccent" width="68" height="20"/>
+        <image name="piePlate" width="240" height="240"/>
+        <image name="triangle1" width="19" height="22"/>
+        <image name="triangle2" width="19" height="22"/>
+        <image name="triangle3" width="19" height="22"/>
+        <image name="triangle4" width="19" height="22"/>
+        <image name="triangle5" width="19" height="22"/>
     </resources>
+    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

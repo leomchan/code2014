@@ -203,6 +203,10 @@
     [[self.contentView subviews]
      makeObjectsPerformSelector:@selector(removeFromSuperview)];
     CODEPieChart * pieChart = [[CODEPieChart alloc] initWithFrame:self.contentView.frame andDictionary:dictionary];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"piePlate"]];
+    imageView.frame = CGRectMake(40, 40, 240, 240);
+    [self.contentView addSubview:imageView];
+    [self.contentView sendSubviewToBack:imageView];
     [self.contentView addSubview:pieChart];
     
 }

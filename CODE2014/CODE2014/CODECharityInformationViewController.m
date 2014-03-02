@@ -71,6 +71,8 @@
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TEST"];
+    tableViewCell.textLabel.font = [UIFont fontWithName:@"AmericanTypewriter" size:14];
+    
     PFObject *object = [self.arrayOfBusinesses objectAtIndex:indexPath.row];
     NSString *string = object[@"Account_Name"];
     tableViewCell.textLabel.text = [string capitalizedString];

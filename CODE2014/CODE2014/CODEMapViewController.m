@@ -183,23 +183,17 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
 
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-   /*
+   
     if (self.selectedObject != nil){
         
         PFGeoPoint *geoPoint = self.selectedObject[@"location"];
         CLLocationCoordinate2D track;
         track.latitude = geoPoint.latitude;
         track.longitude = geoPoint.longitude;
-        
-        MKCoordinateRegion region;
-        MKCoordinateSpan span;
-        span.latitudeDelta = 5;
-        span.longitudeDelta = 5;
-        region.span = span;
-        region.center = track;
-        [self.mapView setRegion:region];
+      
+        [self.mapView setCenterCoordinate:track];
     }
-    */
+    
 }
 
 - (void)didReceiveMemoryWarning
