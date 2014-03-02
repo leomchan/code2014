@@ -41,7 +41,6 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
 
 - (void)fadeIn;
 - (void)fadeOut;
-
 @end
 
 @implementation CODEAnnotationView
@@ -131,6 +130,7 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
 
 - (void)infoTapped:(id)sender;
 - (void)dismissCallout;
+- (void)showCallout;
 
 @end
 
@@ -194,6 +194,8 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
         track.longitude = geoPoint.longitude;
       
         [self.mapView setCenterCoordinate:track];
+        
+        [self showCallout];
     }
 
 }
@@ -248,68 +250,9 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
-    const CGFloat centerOffset = 8.0f;
-    const CGFloat spacingFromEdge = 8.0f;
-
-    CODECalloutView *calloutView = [[[NSBundle mainBundle] loadNibNamed:@"CODECalloutView" owner:self options:nil] objectAtIndex:0];
-    UIImageView *calloutArrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"callout-arrow.png"]];
-    
-    CGRect arrowFrame = calloutArrowImageView.frame;
-    CGRect calloutFrame = calloutView.frame;
-
-    CGSize calloutSize = CGSizeMake(calloutFrame.size.width, calloutFrame.size.height + arrowFrame.size.height);
-    
-    // Does it fit above?
-    if (view.frame.origin.y - calloutSize.height > spacingFromEdge) {
-        calloutFrame.origin = CGPointMake(-calloutFrame.size.width / 2.0f + centerOffset, -calloutFrame.size.height - arrowFrame.size.height);
-        calloutView.frame = calloutFrame;
-        
-        arrowFrame.origin = CGPointMake(-arrowFrame.size.width / 2.0f + centerOffset, -arrowFrame.size.height - 1.0f);
-        calloutArrowImageView.frame = arrowFrame;
-    }
-    else {
-        calloutArrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"callout-arrow-top.png"]];
-        calloutFrame.origin = CGPointMake(-calloutFrame.size.width / 2.0f + centerOffset, arrowFrame.size.height + view.frame.size.height);
-        calloutView.frame = calloutFrame;
-        
-        arrowFrame.origin = CGPointMake(-arrowFrame.size.width / 2.0f + centerOffset, 1.0f + view.frame.size.height);
-        calloutArrowImageView.frame = arrowFrame;
-    }
-    
     PFObject *countryInfo = ((CODEAnnotation *)view.annotation).countryInfo;
     self.selectedObject = countryInfo;
-    
-    calloutView.countryLabel.text = [countryInfo[@"englishName"] uppercaseString];
-    
-    NSNumberFormatter *currencyFormatter = [[NSNumberFormatter alloc] init];
-    currencyFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
-    currencyFormatter.usesGroupingSeparator = YES;
-    
-    calloutView.donationAmountLabel.text = [currencyFormatter stringFromNumber:countryInfo[@"totalContributions"]];
-    
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
-    numberFormatter.usesGroupingSeparator = YES;
-    
-    calloutView.charitiesLabel.text = [numberFormatter stringFromNumber:countryInfo[@"numPrograms"]];
-    
-    TTTOrdinalNumberFormatter *ordinalFormatter = [[TTTOrdinalNumberFormatter alloc] init];
-    [ordinalFormatter setLocale:[NSLocale currentLocale]];
-    [ordinalFormatter setGrammaticalGender:TTTOrdinalNumberFormatterMaleGender];
-    
-    calloutView.rankLabel.text = [ordinalFormatter stringFromNumber:countryInfo[@"contributionRank"]];
-    
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                           action:@selector(infoTapped:)];
-    [calloutView.infoButton addGestureRecognizer:tapGestureRecognizer];
-    
-    calloutView.frame = [view.superview convertRect:calloutView.frame fromView:view];
-    [view.superview addSubview:calloutView];
-    
-    calloutArrowImageView.frame = [view.superview convertRect:calloutArrowImageView.frame fromView:view];
-    [view.superview addSubview:calloutArrowImageView];
-    
-    self.calloutViews = @[calloutView, calloutArrowImageView];
+    [self showCallout];
 }
 
 - (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view
@@ -381,4 +324,89 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
     self.calloutViews = nil;
 }
 
+- (void)showCallout
+{
+    CODEAnnotationView *view = nil;
+    
+    NSMutableArray *subviews = [NSMutableArray arrayWithArray:self.mapView.subviews];
+    
+    while (subviews.count > 0) {
+        CODEAnnotationView *subview = [subviews lastObject];
+        [subviews removeLastObject];
+        [subviews addObjectsFromArray:subview.subviews];
+        
+        if ([subview isMemberOfClass:[CODEAnnotationView class]]) {
+            CODEAnnotation *annotation = (CODEAnnotation *)subview.annotation;
+            if ([annotation.countryInfo[@"countryCode"] isEqualToString:self.selectedObject[@"countryCode"]]) {
+                view = subview;
+                break;
+            }
+        }
+    }
+    
+    if (!view) return;
+    
+    const CGFloat centerOffset = 8.0f;
+    const CGFloat spacingFromEdge = 8.0f;
+    
+    CODECalloutView *calloutView = [[[NSBundle mainBundle] loadNibNamed:@"CODECalloutView" owner:self options:nil] objectAtIndex:0];
+    UIImageView *calloutArrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"callout-arrow.png"]];
+    
+    CGRect arrowFrame = calloutArrowImageView.frame;
+    CGRect calloutFrame = calloutView.frame;
+    
+    CGSize calloutSize = CGSizeMake(calloutFrame.size.width, calloutFrame.size.height + arrowFrame.size.height);
+    
+    // Does it fit above?
+    if (view.frame.origin.y - calloutSize.height > spacingFromEdge) {
+        calloutFrame.origin = CGPointMake(-calloutFrame.size.width / 2.0f + centerOffset, -calloutFrame.size.height - arrowFrame.size.height);
+        calloutView.frame = calloutFrame;
+        
+        arrowFrame.origin = CGPointMake(-arrowFrame.size.width / 2.0f + centerOffset, -arrowFrame.size.height - 1.0f);
+        calloutArrowImageView.frame = arrowFrame;
+    }
+    else {
+        calloutArrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"callout-arrow-top.png"]];
+        calloutFrame.origin = CGPointMake(-calloutFrame.size.width / 2.0f + centerOffset, arrowFrame.size.height + view.frame.size.height);
+        calloutView.frame = calloutFrame;
+        
+        arrowFrame.origin = CGPointMake(-arrowFrame.size.width / 2.0f + centerOffset, 1.0f + view.frame.size.height);
+        calloutArrowImageView.frame = arrowFrame;
+    }
+    
+    PFObject *countryInfo = ((CODEAnnotation *)view.annotation).countryInfo;
+    self.selectedObject = countryInfo;
+    
+    calloutView.countryLabel.text = [countryInfo[@"englishName"] uppercaseString];
+    
+    NSNumberFormatter *currencyFormatter = [[NSNumberFormatter alloc] init];
+    currencyFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
+    currencyFormatter.usesGroupingSeparator = YES;
+    
+    calloutView.donationAmountLabel.text = [currencyFormatter stringFromNumber:countryInfo[@"totalContributions"]];
+    
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+    numberFormatter.usesGroupingSeparator = YES;
+    
+    calloutView.charitiesLabel.text = [numberFormatter stringFromNumber:countryInfo[@"numPrograms"]];
+    
+    TTTOrdinalNumberFormatter *ordinalFormatter = [[TTTOrdinalNumberFormatter alloc] init];
+    [ordinalFormatter setLocale:[NSLocale currentLocale]];
+    [ordinalFormatter setGrammaticalGender:TTTOrdinalNumberFormatterMaleGender];
+    
+    calloutView.rankLabel.text = [ordinalFormatter stringFromNumber:countryInfo[@"contributionRank"]];
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                           action:@selector(infoTapped:)];
+    [calloutView.infoButton addGestureRecognizer:tapGestureRecognizer];
+    
+    calloutView.frame = [view.superview convertRect:calloutView.frame fromView:view];
+    [view.superview addSubview:calloutView];
+    
+    calloutArrowImageView.frame = [view.superview convertRect:calloutArrowImageView.frame fromView:view];
+    [view.superview addSubview:calloutArrowImageView];
+    
+    self.calloutViews = @[calloutView, calloutArrowImageView];
+}
 @end
