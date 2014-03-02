@@ -158,6 +158,16 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
         annotationView.annotation = annotation;
     }
     
+    CODEAnnotation *customAnnotation = ((CODEAnnotation *)annotation);
+    CGFloat value = [customAnnotation.countryInfo[@"totalContributions"] floatValue];
+    value = MIN(MAX(0.0f, value), 100000000);
+    CGFloat t = value / 100000000;
+    CODEDebugLog(@"%@ %f %f", customAnnotation.countryInfo[@"countryCode"], [customAnnotation.countryInfo[@"totalContributions"] floatValue], t);
+    annotationView.pinColor = [UIColor colorWithHue:0.6f - 0.33f * t
+                                         saturation:0.8f
+                                         brightness:0.95f
+                                              alpha:1.0f];
+    [annotationView setNeedsDisplay];
     return annotationView;
 }
 
