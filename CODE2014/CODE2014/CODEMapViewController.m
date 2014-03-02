@@ -239,9 +239,9 @@ NSString * const CODEMapViewControllerPushToCharitySegueIdentifier = @"CODEPushT
     
     calloutView.rankLabel.text = [ordinalFormatter stringFromNumber:countryInfo[@"contributionRank"]];
     
-    [calloutView.infoButton addTarget:self
-                               action:@selector(infoTapped:)
-                     forControlEvents:UIControlEventTouchUpInside];
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                           action:@selector(infoTapped:)];
+    [calloutView addGestureRecognizer:tapGestureRecognizer];
     
     [view addSubview:calloutView];
     [view addSubview:calloutArrowImageView];
