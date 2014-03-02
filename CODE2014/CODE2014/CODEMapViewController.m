@@ -220,6 +220,7 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
     CODEAnnotationView *annotationView = (CODEAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:CODEMapViewControllerCountryAnnotationIdentifier];
     if (!annotationView) {
         annotationView = [[CODEAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:CODEMapViewControllerCountryAnnotationIdentifier];
+        annotationView.backgroundColor = [UIColor blueColor];
     }
     else {
         annotationView.annotation = annotation;
@@ -253,6 +254,9 @@ NSTimeInterval const CODEMapViewControllerFadeDuration = 0.5;
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
+    
+    CODEDebugLog(@"HALLO?");
+    
     const CGFloat centerOffset = 8.0f;
     const CGFloat spacingFromEdge = 8.0f;
 
