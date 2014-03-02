@@ -133,7 +133,7 @@ financialResourcesQuery.each (
 
 	});
 
-var CountryInfo = Parse.Object.extend("CountryInfo2");
+var CountryInfo = Parse.Object.extend("CountryInfo");
 
 //var countryInfo = new CountryInfo;
 function addCountryInfo() {

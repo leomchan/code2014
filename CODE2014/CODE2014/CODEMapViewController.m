@@ -239,7 +239,7 @@ NSString * const CODEMapViewControllerPushToCharitySegueIdentifier = @"CODEPushT
     [ordinalFormatter setLocale:[NSLocale currentLocale]];
     [ordinalFormatter setGrammaticalGender:TTTOrdinalNumberFormatterMaleGender];
     
-    calloutView.rankLabel.text = [ordinalFormatter stringFromNumber:[NSNumber numberWithInt:5]];
+    calloutView.rankLabel.text = [ordinalFormatter stringFromNumber:countryInfo[@"contributionRank"]];
     
     [calloutView.infoButton addTarget:self
                                action:@selector(infoTapped:)
