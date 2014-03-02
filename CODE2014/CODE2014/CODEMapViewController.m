@@ -9,10 +9,12 @@
 #import "CODEMapViewController.h"
 #import "CODEDataManager.h"
 #import "CODECalloutView.h"
+#import "CODECharityInformationViewController.h"
 
 NSString * const CODEMapViewControllerCountryAnnotationIdentifier = @"country";
 NSString * const CODEMapViewControllerPushToInfoSegueIdentifier = @"CODEPushToInfo";
 NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToList";
+NSString * const CODEMapViewControllerPushToCharitySegueIdentifier = @"CODEPushToCharities";
 
 @interface CODEMapViewController ()
 @property (nonatomic, strong) NSMutableArray *arrayOfCountries;
@@ -20,6 +22,7 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
 
 @interface CODEAnnotation : NSObject <MKAnnotation>
 @property (nonatomic)CLLocationCoordinate2D coordinate;
+@property (nonatomic, strong) PFObject *selectedCountry;
 @property (nonatomic, copy) NSString *title;
 @end
 
@@ -55,6 +58,7 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
                 CODEAnnotation *annotation = [[CODEAnnotation alloc] init];
                 annotation.coordinate = CLLocationCoordinate2DMake(geoPoint.latitude, geoPoint.longitude);
                 CODEDebugLog(@"%@",object);
+                annotation.selectedCountry = object;
                 annotation.title = [object[@"englishName"] capitalizedString];
                 [annotationsToAdd addObject:annotation];
             }
@@ -114,7 +118,8 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
-    [self performSegueWithIdentifier:CODEMapViewControllerPushToInfoSegueIdentifier sender:self];
+    self.selectedObject = ((CODEAnnotation *) view.annotation).selectedCountry;
+    [self performSegueWithIdentifier:CODEMapViewControllerPushToCharitySegueIdentifier sender:self];
 }
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
@@ -140,6 +145,10 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
     for (UIView *subview in view.subviews) {
         [subview removeFromSuperview];
     }
+    //TODO: TAKE THIS OUT AFTER THE VIEW IS READY//
+    self.selectedObject = ((CODEAnnotation *) view.annotation).selectedCountry;
+    [self performSegueWithIdentifier:CODEMapViewControllerPushToCharitySegueIdentifier sender:self];
+
 }
 
 /******************************************************************************/
@@ -151,6 +160,9 @@ NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToLi
     if ([segue.identifier isEqualToString:@"CODEPushToList"]){
         CODEListViewController *controller = segue.destinationViewController;
         controller.delegate = self;
+    }else if ([segue.identifier isEqualToString:CODEMapViewControllerPushToCharitySegueIdentifier]){
+        CODECharityInformationViewController *controller = segue.destinationViewController;
+        controller.selectedCountry = self.selectedObject;
     }
 }
 

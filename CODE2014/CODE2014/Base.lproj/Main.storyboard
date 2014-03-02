@@ -36,7 +36,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="420" y="618"/>
+            <point key="canvasLocation" x="448" y="-163"/>
         </scene>
         <!--Map View Controller - Map!-->
         <scene sceneID="45t-R9-nT9">
@@ -70,13 +70,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="eo0-jm-jS3" id="JQS-b1-oxf"/>
-                        <segue destination="NOY-Uq-MiF" kind="push" identifier="CODEPushToInfo" id="LG3-0E-3DX"/>
-                        <segue destination="Rrw-0I-Ey8" kind="push" id="8gV-Zb-yZN"/>
+                        <segue destination="Rrw-0I-Ey8" kind="push" identifier="CODEPushToCharities" id="8gV-Zb-yZN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Pm-Eo-E3g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="420" y="-163"/>
+            <point key="canvasLocation" x="-104" y="-163"/>
         </scene>
         <!--Pie Chart Info View Controller-->
         <scene sceneID="hc9-MJ-Fd6">
@@ -129,7 +128,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BeT-JY-vdx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1103" y="-627"/>
+            <point key="canvasLocation" x="1019" y="742"/>
         </scene>
         <!--Charity Information View Controller-->
         <scene sceneID="5xG-dJ-KMz">
@@ -140,15 +139,31 @@
                         <viewControllerLayoutGuide type="bottom" id="ETt-wZ-Axc"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="UNd-NL-4gy">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="SuY-85-5PO">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Rrw-0I-Ey8" id="NBe-Sy-Xc8"/>
+                                    <outlet property="delegate" destination="Rrw-0I-Ey8" id="aQg-Rf-urZ"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="Z67-L8-0hM"/>
+                    <connections>
+                        <outlet property="mainTableView" destination="SuY-85-5PO" id="HLx-h4-JtY"/>
+                        <segue destination="NOY-Uq-MiF" kind="push" id="FGY-i3-Ecl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mi5-JH-XDF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1148" y="134"/>
+            <point key="canvasLocation" x="448" y="742"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4ah-bJ-g7q">
@@ -166,7 +181,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LbE-nL-t5c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-92" y="-155"/>
+            <point key="canvasLocation" x="-580" y="-163"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

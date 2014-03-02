@@ -60,7 +60,7 @@
         string = object[@"countryCode"];
     }
     
-    tableViewCell.textLabel.text = string;
+    tableViewCell.textLabel.text = [string capitalizedString];
     return tableViewCell;
 }
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

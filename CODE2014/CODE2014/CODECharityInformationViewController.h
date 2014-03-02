@@ -8,6 +8,9 @@
 
 #import "CODEBaseViewController.h"
 
-@interface CODECharityInformationViewController : CODEBaseViewController
+@interface CODECharityInformationViewController : CODEBaseViewController<UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) PFObject *selectedCountry;
+@property (nonatomic, weak) IBOutlet UITableView * mainTableView;
 
 @end
