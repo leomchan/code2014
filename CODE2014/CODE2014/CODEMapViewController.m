@@ -10,15 +10,18 @@
 #import "CODEDataManager.h"
 #import "CODECalloutView.h"
 #import "CODECharityInformationViewController.h"
+#import "TTTOrdinalNumberFormatter.h"
 
 NSString * const CODEMapViewControllerCountryAnnotationIdentifier = @"country";
 NSString * const CODEMapViewControllerPushToInfoSegueIdentifier = @"CODEPushToInfo";
 NSString * const CODEMapViewControllerPushToListSegueIdentifier = @"CODEPushToList";
 NSString * const CODEMapViewControllerPushToCharitySegueIdentifier = @"CODEPushToCharities";
 
-@interface CODEMapViewController ()
-@property (nonatomic, strong) NSMutableArray *arrayOfCountries;
-@end
+/******************************************************************************/
+/******************************************************************************/
+/******************************************************************************/
+
+#pragma mark - Annotation
 
 @interface CODEAnnotation : NSObject <MKAnnotation>
 @property (nonatomic)CLLocationCoordinate2D coordinate;
@@ -27,6 +30,52 @@ NSString * const CODEMapViewControllerPushToCharitySegueIdentifier = @"CODEPushT
 @end
 
 @implementation CODEAnnotation
+@end
+
+@interface CODEAnnotationView : MKAnnotationView
+@property(nonatomic,strong) UIImage *postImage;
+@property(nonatomic,strong) UIColor *pinColor;
+@end
+
+@implementation CODEAnnotationView
+
+- (id)initWithAnnotation:(id<MKAnnotation>)annotation reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
+    if (self) {
+        self.frame = CGRectMake(0.0f, 0.0f, 30.0f, 40.0f);
+        self.backgroundColor = [UIColor clearColor];
+        self.postImage = [UIImage imageNamed:@"post.png"];
+        self.centerOffset = CGPointMake(10.0f, -16.0f);
+        self.pinColor = [UIColor redColor];
+    }
+    return self;
+}
+
+- (void)drawRect:(CGRect)rect
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    [self.postImage drawInRect:CGRectMake(2.0f, 18.0f, 28.0f, 31.0f)];
+    
+    CGContextSetFillColorWithColor(context, self.pinColor.CGColor);
+    CGContextFillEllipseInRect(context, CGRectMake(0.0f, 10.0f, 13.0f, 13.0f));
+    
+    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+    CGContextFillEllipseInRect(context, CGRectMake(3.0f, 12.0f, 3.0f, 3.0f));
+}
+
+@end
+/******************************************************************************/
+/******************************************************************************/
+/******************************************************************************/
+
+#pragma mark - Map View Controller
+
+@interface CODEMapViewController ()
+@property (nonatomic, strong) NSMutableArray *arrayOfCountries;
+@property (nonatomic,assign) double maxContributions;
+- (void)infoTapped:(id)sender;
 @end
 
 @implementation CODEMapViewController
@@ -50,6 +99,7 @@ NSString * const CODEMapViewControllerPushToCharitySegueIdentifier = @"CODEPushT
     [[CODEDataManager manager] getApplicableCountriesWithBlock:^(NSArray *items, NSError *error) {
         
         self.arrayOfCountries = [NSMutableArray arrayWithArray:items];
+        self.maxContributions = 0.0;
         
         NSMutableArray *annotationsToAdd = [NSMutableArray array];
         for (PFObject *object in self.arrayOfCountries){
@@ -59,6 +109,11 @@ NSString * const CODEMapViewControllerPushToCharitySegueIdentifier = @"CODEPushT
                 annotation.coordinate = CLLocationCoordinate2DMake(geoPoint.latitude, geoPoint.longitude);
 
                 annotation.countryInfo = object;
+                NSNumber *totalContributions = object[@"totalContributions"];
+                if (totalContributions) {
+                    self.maxContributions = MAX(self.maxContributions, [totalContributions doubleValue]);
+                }
+                
                 annotation.title = [object[@"englishName"] capitalizedString];
                 [annotationsToAdd addObject:annotation];
             }
@@ -88,9 +143,9 @@ NSString * const CODEMapViewControllerPushToCharitySegueIdentifier = @"CODEPushT
         region.span = span;
         region.center = track;
         [self.mapView setRegion:region];
-        
     }
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -105,14 +160,23 @@ NSString * const CODEMapViewControllerPushToCharitySegueIdentifier = @"CODEPushT
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
 {
-    MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:CODEMapViewControllerCountryAnnotationIdentifier];
+    CODEAnnotationView *annotationView = (CODEAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:CODEMapViewControllerCountryAnnotationIdentifier];
     if (!annotationView) {
-        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:CODEMapViewControllerCountryAnnotationIdentifier];
+        annotationView = [[CODEAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:CODEMapViewControllerCountryAnnotationIdentifier];
     }
     else {
         annotationView.annotation = annotation;
     }
     
+    CODEAnnotation *customAnnotation = ((CODEAnnotation *)annotation);
+    double value = [customAnnotation.countryInfo[@"totalContributions"] doubleValue];
+    value = MIN(MAX(0.0f, value), self.maxContributions);
+    double t = value / self.maxContributions;
+    annotationView.pinColor = [UIColor colorWithHue:0.6f - 0.33f * t
+                                         saturation:0.8f
+                                         brightness:0.95f
+                                              alpha:1.0f];
+    [annotationView setNeedsDisplay];
     return annotationView;
 }
 
@@ -126,7 +190,7 @@ NSString * const CODEMapViewControllerPushToCharitySegueIdentifier = @"CODEPushT
 {
     const CGFloat centerOffset = 8.0f;
     const CGFloat spacingFromEdge = 8.0f;
-    
+
     CODECalloutView *calloutView = [[[NSBundle mainBundle] loadNibNamed:@"CODECalloutView" owner:self options:nil] objectAtIndex:0];
     UIImageView *calloutArrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"callout-arrow.png"]];
     
@@ -153,6 +217,10 @@ NSString * const CODEMapViewControllerPushToCharitySegueIdentifier = @"CODEPushT
     }
     
     PFObject *countryInfo = ((CODEAnnotation *)view.annotation).countryInfo;
+    self.selectedObject = countryInfo;
+    
+    calloutView.countryLabel.text = [countryInfo[@"englishName"] uppercaseString];
+    
     NSNumberFormatter *currencyFormatter = [[NSNumberFormatter alloc] init];
     currencyFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
     currencyFormatter.usesGroupingSeparator = YES;
@@ -163,7 +231,17 @@ NSString * const CODEMapViewControllerPushToCharitySegueIdentifier = @"CODEPushT
     numberFormatter.numberStyle = NSNumberFormatterDecimalStyle;
     numberFormatter.usesGroupingSeparator = YES;
     
-    calloutView.charitiesLabel.text = [numberFormatter stringFromNumber:countryInfo[@"numContributors"]];
+    calloutView.charitiesLabel.text = [numberFormatter stringFromNumber:countryInfo[@"numPrograms"]];
+    
+    TTTOrdinalNumberFormatter *ordinalFormatter = [[TTTOrdinalNumberFormatter alloc] init];
+    [ordinalFormatter setLocale:[NSLocale currentLocale]];
+    [ordinalFormatter setGrammaticalGender:TTTOrdinalNumberFormatterMaleGender];
+    
+    calloutView.rankLabel.text = [ordinalFormatter stringFromNumber:[NSNumber numberWithInt:5]];
+    
+    [calloutView.infoButton addTarget:self
+                               action:@selector(infoTapped:)
+                     forControlEvents:UIControlEventTouchUpInside];
     
     [view addSubview:calloutView];
     [view addSubview:calloutArrowImageView];
@@ -205,6 +283,20 @@ NSString * const CODEMapViewControllerPushToCharitySegueIdentifier = @"CODEPushT
 - (void)listViewController:(CODEListViewController *)controller didSelectCountryInfo:(PFObject *)countryInfo
 {
     self.selectedObject = countryInfo;
+}
+
+/******************************************************************************/
+/******************************************************************************/
+/******************************************************************************/
+
+#pragma mark - Actions
+
+- (void)infoTapped:(id)sender
+{
+    if (self.selectedObject) {
+        [self performSegueWithIdentifier:CODEMapViewControllerPushToInfoSegueIdentifier
+                                  sender:sender];
+    }
 }
 
 @end
